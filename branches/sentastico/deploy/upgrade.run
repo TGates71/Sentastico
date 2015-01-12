@@ -1,0 +1,31 @@
+<?php
+// Sentastico Open Source Script Installer for Sentora CP
+// File				: upgrade.run
+// Version          : 20.1.0.0 (09-15-2014)
+// Updated By       : TGates for Sentora
+// Additional Work  : Durandle
+// Packages Updated : 05-05-2014 by TGates
+// Contact Email    : tgates@mach-hosting.com
+// Original Authors : Bobby Allen/Mudasir Mirza
+
+require_once('cnf/db.php');
+require_once('dryden/db/driver.class.php');
+require_once('dryden/debug/logger.class.php');
+require_once('dryden/runtime/dataobject.class.php');
+require_once('dryden/sys/versions.class.php');
+require_once('dryden/ctrl/options.class.php');
+require_once('dryden/ctrl/auth.class.php');
+require_once('dryden/ctrl/users.class.php');
+require_once('dryden/fs/director.class.php');
+require_once('inc/dbc.inc.php');
+
+//First variable is the new version. Second variable is the module folder name
+UpgradeModule('20100', 'sentastico');
+
+function UpgradeModule($newversion, $module){
+    global $zdbh;
+    $sql = $zdbh->prepare("UPDATE x_modules SET mo_version_in = $newversion WHERE mo_folder_vc = '$module'");
+    $sql->execute();     
+}
+
+?> 

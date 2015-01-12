@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+// Sentastico Open Source Script Installer for Sentora CP
+// File				: packages.xml
+// Version          : 20.1.0.0 (09-14-2014)
+// Updated By       : TGates for Sentora
+// Additional Work  : Durandle
+// Packages Updated : 03/08/2013 by jacobg830
+// Contact Email    : tgates@mach-hosting.com
+// Original Authors : Bobby Allen/Mudasir Mirza
+-->
+<packages>
+<package>
+<name>Platinum Nuke Pro</name>
+<version>1.0.1</version>
+<zipname>pnp101</zipname>
+<type>Portals/CMS</type>
+<info>Platinum Nuke Pro is a highly modified Content Management System (CMS) with lots of new features, mods and other enhancements that takes you far beyond the basic Platinum and phpnuke versions. Featuring Forums, web-based administration, surveys, customizable blocks, modules and themes with multilanguage support.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>Joomla</name>
+<version>3.3.0</version>
+<zipname>joomla330</zipname>
+<type>Portals/CMS</type>
+<info>Dynamic portal engine and content management system.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>Wordpress</name>
+<version>3.9</version>
+<zipname>wordpress39</zipname>
+<type>Portals/CMS</type>
+<info>WordPress is web software you can use to create a beautiful website or blog.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>Drupal</name>
+<version>7.22</version>
+<zipname>drupal722</zipname>
+<type>Portals/CMS</type>
+<info>Drupal is an open source content management platform powering millions of websites and applications.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>PHP-Nuke</name>
+<version>8.2.4</version>
+<zipname>php-nuke824</zipname>
+<type>Portals/CMS</type>
+<info>Content management and portal solution featuring web-based administration, surveys, customizable blocks, modules and themes with multilanguage support.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>ImpressPages</name>
+<version>4.0.12</version>
+<zipname>impresspages4012</zipname>
+<type>Portals/CMS</type>
+<info>Web CMS built on PHP5.3 and MySQL. Efficient tool to create and manage websites. Add more value and peace of mind.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>MyBB Forum</name>
+<version>1.6.13</version>
+<zipname>mybb1613</zipname>
+<type>Forums</type>
+<info>MyBB is a discussion board that has been around for a while; it has evolved from other bulletin boards into the forum package it is today. Therefore, it is a professional and efficient discussion board, developed by an active team of developers.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>phpBB</name>
+<version>3.0.12</version>
+<zipname>phpbb3012</zipname>
+<type>Forums</type>
+<info>phpBB is free and open source forum software that is easy to use, powerful, and highly customisable</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>Simple Machines Forum</name>
+<version>2.0.7</version>
+<zipname>smf207</zipname>
+<type>Forums</type>
+<info>SMF - The open source web based forums</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>b2evolution</name>
+<version>5.0.8</version>
+<zipname>b2evolution508</zipname>
+<type>Blogs</type>
+<info>Open source PHP/ mySQL weblog tool derived from the same code that later became WordPress. Supports multiple categories, sub-categories, etc...</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>osCommerce</name>
+<version>2.3.4</version>
+<zipname>oscommerce234</zipname>
+<type>E-Commerce</type>
+<info>A free online shop program featuring order history, shopping carts, full search capability, product reviews, secure transactions, bestseller lists, and related items.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>Zen Cart</name>
+<version>1.5.1</version>
+<zipname>zencart151</zipname>
+<type>E-Commerce</type>
+<info>Zen Cart® truly is the art of e-commerce; free, user-friendly, open source shopping cart software</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>Gallery</name>
+<version>3.0.9</version>
+<zipname>gallery309</zipname>
+<type>Image galleries</type>
+<info>Free, open source, photo management system. Photo management includes automatic thumbnail creation, image resizing, rotation, ordering, captioning, etc...</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>Coppermine</name>
+<version>1.5.28</version>
+<zipname>coppermine1528</zipname>
+<type>Image galleries</type>
+<info>Coppermine is a multi-purpose fully-featured and integrated web picture gallery script written in PHP using GD or ImageMagick as image library with a MySQL backend.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>Moodle</name>
+<version>2.6</version>
+<zipname>moodle26</zipname>
+<type>CMS/LMS/VLE</type>
+<info>Moodle is a Course Management System (CMS), also known as a Learning Management System (LMS) or a Virtual Learning Environment (VLE). It is a Free web application that educators can use to create effective online learning sites.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>Crafty Syntax</name>
+<version>3.4.4</version>
+<zipname>craftysyntax344</zipname>
+<type>Live Support</type>
+<info>Crafty Syntax Live Help is a live support application. highlighted features include the ability to create your own questions, auto inviting visitors, referrer tracking, page tracking.. and more.</info>
+<db>yes</db> // Does this package require a database? (yes/no)
+</package>
+<package>
+<name>DokuWiki</name>
+<version>2013-12-08</version>
+<zipname>dokuwiki20131208</zipname>
+<type>Wiki</type>
+<info>DokuWiki is a simple to use and highly versatile Open Source wiki software that doesn't require a database.</info>
+<db>no</db> // Does this package require a database? (yes/no)
+</package>
+</packages>

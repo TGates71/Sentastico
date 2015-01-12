@@ -1,7 +1,7 @@
 <!--
 // Sentastico Open Source Script Installer for Sentora CP
 // File				: module.zpm
-// Version          : 20.1.0.0 (09-15-2014)
+// Version          : 20.1.0.0 (1-12-2015)
 // Updated By       : TGates for Sentora
 // Additional Work  : Durandle
 // Packages Updated : 05-05-2014 by TGates
@@ -32,7 +32,7 @@
                 <@ CustomPackageSelection @>
         </div>
     <% endif %>
-<font face="ariel" size="1">Sentastico 20.1.0.0 by <a href="http://www.mach-hosting.com">TGates</a> formerly Zantastico X [Original coding by Bobby Allen (Zantastico) and Mudasir Mirza (Zantastico 3.x.x)]</font>
+<font face="ariel" size="1">Sentastico 20.1.0.0 by <a href="http://www.mach-hosting.com">TGates</a> formerly Zantastico X</font>
 <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
     <input type="hidden" name="cmd" value="_s-xclick"/>
     <input type="hidden" name="hosted_button_id" value="RGCT6MKNG6RJW"/>

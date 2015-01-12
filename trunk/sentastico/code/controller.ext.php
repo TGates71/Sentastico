@@ -1,7 +1,7 @@
 <?php
 // Sentastico Open Source Script Installer for Sentora CP
 // File				: controller.ext.php
-// Version          : 20.1.0.0 (09-15-2014)
+// Version          : 20.1.0.0 (1-12-2015)
 // Updated By       : TGates for Sentora
 // Additional Work  : Durandle
 // Packages Updated : 05-05-2014 by TGates
@@ -79,7 +79,7 @@ function clean($var){
 // Function to create Directory
 function CreateDir($completedir,$domaindir,$dir_to_install){
 	if (!file_exists($completedir)) {
-		$mkdir = mkdir($completedir);
+		$mkdir = @mkdir($completedir);
 		if($mkdir){
 			return true;
 		} else {
@@ -93,10 +93,10 @@ function emptyDir($completedir) {
 	$i = new DirectoryIterator($completedir);
 		foreach($i as $f) {
 			if($f->isFile()) {
-				unlink($f->getRealPath());
+				@unlink($f->getRealPath());
 			} else if(!$f->isDot() && $f->isDir()) {
 				emptyDir($f->getRealPath());
-		rmdir($f->getRealPath());
+		@rmdir($f->getRealPath());
 			}
 		}
 }
@@ -193,7 +193,7 @@ class module_controller {
     
     static function getCheckDBUpdates() {
         global $zdbh;
-        include(ctrl_options::GetOption('zpanel_root').'/cnf/db.php');
+        include(ctrl_options::GetOption('sentora_root').'/cnf/db.php');
 
         // Updates
         $v_update_sql = $zdbh->prepare("UPDATE x_modules SET mo_version_in=20100 WHERE mo_name_vc='".ui_module::GetModuleName()."'");
@@ -305,19 +305,23 @@ class module_controller {
 															<font color=\"red\">NOTE:</font> For multiple subfolders use: subfolder/subsubfolder
 													</td>
 												</tr>
-												<tr><td><p>&nbsp;</p></td></tr>
 												<tr>
-													<td>
-													<!-- inputs -->
-													<input type=\"hidden\" name=\"startinstall\" value=\"true\"> 
-													<input type=\"hidden\" name=\"u\" value=".$currentuser['userid']."> 
-													<input type=\"hidden\" name=\"pkgzip\" value=".$zipfile."> 
-													<input type=\"hidden\" name=\"pkg\" value='".$pkgInstall."'> 
-													<input type=\"hidden\" name=\"pkgdb\" value=".$_POST['pkgdb'].">
-													<input class=\"btn btn-primary btn-small\" type=\"submit\" name=\"submit\" value=\"Install\" onclick=\"$('#loading').show();\" />
-													<input class=\"btn btn-danger btn-small\" type=\"button\" name=\"cancel\" value=\"Cancel\" onClick=\"javascript:location.href='?module=sentastico'\" />
+													<td colspan=\"3\">
+														<p>&nbsp;</p>
 													</td>
-													<td></td><td></td>
+												</tr>
+												<tr>
+													<td colspan=\"2\" class=\"button-align\">
+														<!-- inputs -->
+														<input type=\"hidden\" name=\"startinstall\" value=\"true\"> 
+														<input type=\"hidden\" name=\"u\" value=".$currentuser['userid']."> 
+														<input type=\"hidden\" name=\"pkgzip\" value=".$zipfile."> 
+														<input type=\"hidden\" name=\"pkg\" value='".$pkgInstall."'> 
+														<input type=\"hidden\" name=\"pkgdb\" value=".$_POST['pkgdb'].">
+														<button class=\"btn btn-danger btn-small\" type=\"submit\" name=\"submit\" value=\"Install\" onclick=\"$('#loading').show();\">Install</button>&nbsp;&nbsp;
+														<button class=\"btn btn-danger btn-small\" type=\"button\" name=\"cancel\" value=\"Cancel\" onClick=\"javascript:location.href='?module=sentastico'\">Cancel</button>
+													</td>
+													<td>&nbsp;</td>
 											   </tr>
 											</table>";
 										$line .="</form>";
@@ -380,7 +384,7 @@ class module_controller {
 											$line .="<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."/sentastico-install.php'> <button class=\"btn btn-primary btn-small\" type=\"button\">Install Now</button> </a>";
 											$line .="<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
 										} else {
-											$line .="<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."/'><button class=\"btn btn-primary btn-small\" type=\"button\">Install Now</button></a>";
+											$line .="<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."/'><button class=\"btn btn-primary btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Install Now</button></a>&nbsp;&nbsp;";
 											$line .="<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
 										}
 										

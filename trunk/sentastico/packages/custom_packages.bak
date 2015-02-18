@@ -24,6 +24,6 @@
 <zipname>empty</zipname>
 <type>empty</type>
 <info>This is just a place holder</info>
-<db>yes</db> // Does this package require a database? (yes/no)
+<db>no</db> // Does this package require a database? (yes/no)
 </package>
 </packages>

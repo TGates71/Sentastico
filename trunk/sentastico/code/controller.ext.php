@@ -1,12 +1,11 @@
 <?php
 // Sentastico Open Source Script Installer for Sentora CP
 // File				: controller.ext.php
-// Version          : 20.1.0.0 (1-12-2015)
+// Version          : 20.1.2.0 (02-18-2015)
 // Updated By       : TGates for Sentora
-// Additional Work  : Durandle
-// Packages Updated : 05-05-2014 by TGates
+// Additional Work  : Durandle, Mudasir Mirza
 // Contact Email    : tgates@mach-hosting.com
-// Original Authors : Bobby Allen/Mudasir Mirza
+// Original Author  : Bobby Allen
 
 // List domains in DropDown Menu
 function ListDomain($uid){
@@ -16,7 +15,7 @@ function ListDomain($uid){
     if (@mysql_num_rows($numrows) == 0) {
         $sql = $zdbh->prepare($sql);
         $html="";
-        $html .="<select name=site_domain>";
+        $html .= "<select name = site_domain style=\"width: 300px\">";
         $sql->execute();
         while ($rowsettings = $sql->fetch()) {
             $domain = $rowsettings['vh_name_vc'];
@@ -210,7 +209,7 @@ class module_controller {
 		// load module spcific style sheet
         $line = '<link rel="stylesheet" type="text/css" href="modules/'.$controller->GetControllerRequest('URL', 'module').'/assets/sentastico.css">';
 		// load module spcific JS
-		$line .= '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>';
+		$line .= '<script src="modules/'.$controller->GetControllerRequest('URL', 'module').'/assets/sorttable.js"></script>';
         return $line;
     }
 
@@ -264,22 +263,22 @@ class module_controller {
 						$line ="<h2>Preparing to install ".$pkgInstall.":</h2>";
 							if (!isset($startinstall)) {
 								if ($pkgdb == "yes") {
-										$line .="<font color=\"red\"><strong>This package requires a database and database user.</strong></font><br />";
-										$line .="<a target=\"_blank\" href=\"../../../?module=mysql_databases\">&raquo;Open&laquo; </a> database manager.<br />";
-										$line .="<a target=\"_blank\" href=\"../../../?module=mysql_users\">&raquo;Open&laquo; </a> database user manager.";
-										$line .="<p>&nbsp;</p>";
+										$line .= "<font color=\"red\"><strong>This package requires a database and database user.</strong></font><br />";
+										$line .= "<a target=\"_blank\" href=\"../../../?module=mysql_databases\">&raquo;Open&laquo; </a> database manager.<br />";
+										$line .= "<a target=\"_blank\" href=\"../../../?module=mysql_users\">&raquo;Open&laquo; </a> database user manager.";
+										$line .= "<p>&nbsp;</p>";
 									}
-										$line .="<p>Please provide the domain and folder name to start the installation of ".$pkgInstall.".</p>";
-										$line .="<form id=\"form\" name=\"doInstall\" action=\"/?module=sentastico\" method=\"post\">";
-										$line .="<table>
+										$line .= "<p>Please provide the domain and folder name to start the installation of ".$pkgInstall.".</p>";
+										$line .= "<form id=\"form\" name=\"doInstall\" action=\"/?module=sentastico\" method=\"post\">";
+										$line .= "<table>
 												<tr>
 													<td align=\"right\">
 														<label for=\"site_domain\">Select domain: </label>
 													</td>";
-													$line .="<td align=\"center\">";
+													$line .= "<td align=\"center\">";
 														$list = ListDomain($currentuser['userid']);
 														$line .= $list;
-													$line .="</td>
+													$line .= "</td>
 													<td>&nbsp;</td>
 												</tr>
 												<tr>
@@ -299,7 +298,7 @@ class module_controller {
 														<label for=\"dir_to_install\">Install To Sub-Folder: public_html/[domain]/</label>
 													</td>
 													<td>
-															<input type=\"text\" name=\"dir_to_install\" />
+															<input type=\"text\" name=\"dir_to_install\" style=\"width: 300px\"/>
 													</td>
 													<td>
 															<font color=\"red\">NOTE:</font> For multiple subfolders use: subfolder/subsubfolder
@@ -324,8 +323,8 @@ class module_controller {
 													<td>&nbsp;</td>
 											   </tr>
 											</table>";
-										$line .="</form>";
-											$line .="<div id=\"loading\" style=\"display:none;\">
+										$line .= "</form>";
+											$line .= "<div id=\"loading\" style=\"display:none;\">
 												Please wait...<br />
 												<img src=\"modules/sentastico/assets/bar.gif\" alt=\"\" /><br />
 												Unpacking ".$pkgInstall."...
@@ -333,70 +332,69 @@ class module_controller {
 									}
 								}
 				} else {
-						$userid=$_POST['u'];
-						$installed=$_SESSION['installed'];
-						$install_to_base_dir=$_POST['install_to_base_dir'];
-						$currentuser=ctrl_users::GetUserDetail($userid);
-						$hostdatadir=ctrl_options::GetOption('hosted_dir')."".$currentuser['username'];
+						$userid = $_POST['u'];
+						$installed = @$_SESSION['installed'];
+						$install_to_base_dir = $_POST['install_to_base_dir'];
+						$currentuser = ctrl_users::GetUserDetail($userid);
+						$hostdatadir = ctrl_options::GetOption('hosted_dir')."".$currentuser['username'];
 							   
-						$site_domain=clean($_POST['site_domain']);
-						$dir_to_install=clean($_POST['dir_to_install']);
-						$install_to_base_dir=clean($_POST['install_to_base_dir']);
+						$site_domain = clean($_POST['site_domain']);
+						$dir_to_install = clean($_POST['dir_to_install']);
+						$install_to_base_dir = clean($_POST['install_to_base_dir']);
 						
 						// Retrieve the directory for the Domain selected
-						$domaindir=FetchDomainDir($userid, $site_domain);
-						$completedir=$hostdatadir."/public_html".$domaindir."/".$dir_to_install."" ;
+						$domaindir = FetchDomainDir($userid, $site_domain);
+						$completedir = $hostdatadir."/public_html".$domaindir."/".$dir_to_install."" ;
 						
-						$line ="<h2>Automated " .$pkgInstall. " Installation Status:</h2>";
+						$line  = "<h2>Automated " .$pkgInstall. " Installation Status:</h2>";
 						
 							if ((file_exists($completedir)) && ($install_to_base_dir != '1') && (empty($dir_to_install)) && ($installed != 'true')) {
-								$line .="If not empty root folder<br><br>";
-								$line .="<p><font color=\"red\"><strong>Destination folder already exists!</strong></font><br /><br />Sorry, the install folder (<strong>/public_html".$domaindir."/".$dir_to_install."</strong>) already exists or contains files.<br />Please go back and create a new folder.</p>";
-								$line .="<p><button class=\"btn btn-danger btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Start over</button></p>";
+								$line .= "If not empty root folder<br><br>";
+								$line .= "<p><font color=\"red\"><strong>Destination folder already exists!</strong></font><br /><br />Sorry, the install folder (<strong>/public_html".$domaindir."/".$dir_to_install."</strong>) already exists or contains files.<br />Please go back and create a new folder.</p>";
+								$line .= "<p><button class=\"btn btn-danger btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Start over</button></p>";
 								
 // START issue here with showing folder exists even if folder created upon unzip completion		
-							} else if ((file_exists($completedir)) && ($install_to_base_dir != '1') && (isset($dir_to_install))
-							 && ($installed != 'true')) {
-								$line .="If not empty sub folder<br><br>";
-								$line .="<p><font color=\"red\"><strong>Destination folder already exists!</strong></font><br /><br />Sorry, the install folder (<strong>/public_html".$domaindir."/".$dir_to_install."</strong>) already exists or contains files.<br />Please go back and create a new folder.</p>";
-								$line .="<p><button class=\"btn btn-danger btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Start over</button></p>";
+							} else if ((file_exists($completedir)) && ($install_to_base_dir != '1') && (isset($dir_to_install)) && ($installed != 'true')) {
+								$line .= "If not empty sub folder<br><br>";
+								$line .= "<p><font color=\"red\"><strong>Destination folder already exists!</strong></font><br /><br />Sorry, the install folder (<strong>/public_html".$domaindir."/".$dir_to_install."</strong>) already exists or contains files.<br />Please go back and create a new folder.</p>";
+								$line .= "<p><button class=\"btn btn-danger btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Start over</button></p>";
 // START issue here with showing folder exists even if folder created upon unzip completion		
 								
 							} else {
-								$line .="Preparing folder: ";
+								$line .= "Preparing folder: ";
 								CreateDir($completedir,$domaindir,$dir_to_install);
-								$line .="<font color=\"green\">Folder created Successfully!</font>";
+								$line .= "<font color=\"green\">Folder created Successfully!</font>";
 
 								sleep(1);
 								// Remove all Files in the install Folder
 								emptyDir($completedir);
 								sleep(3);
 								set_time_limit(0);
-								$line .="<br />Installing files: ";
+								$line .= "<br />Installing files: ";
 								
-								$line .="<form><input type='hidden' name='installed' value='InS'></form>";
+								$line .= "<form><input type='hidden' name='installed' value='InS'></form>";
 								
 								// Un-Compressing The ZIP Archive
 								if (UnZip($zipfile.".zip",$completedir,$site_domain,$dir_to_install) == 'true'){
-									$line .="<font color=\"green\">Unzip was successful</font><br />";
-									$line .="Package unzipped to: http://".$site_domain."/".$dir_to_install."<br /><br />";
+									$line .= "<font color=\"green\">Unzip was successful</font><br />";
+									$line .= "Package unzipped to: http://".$site_domain."/".$dir_to_install."<br /><br />";
 									if(file_exists($completedir."/sentastico-install.php")) {
-											$line .="<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."/sentastico-install.php'> <button class=\"btn btn-primary btn-small\" type=\"button\">Install Now</button> </a>";
-											$line .="<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
+											$line .= "<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."/sentastico-install.php'> <button class=\"btn btn-primary btn-small\" type=\"button\">Install Now</button> </a>";
+											$line .= "<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
 										} else {
-											$line .="<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."/'><button class=\"btn btn-primary btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Install Now</button></a>&nbsp;&nbsp;";
-											$line .="<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
+											$line .= "<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."/'><button class=\"btn btn-primary btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Install Now</button></a>&nbsp;&nbsp;";
+											$line .= "<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
 										}
 										
 									 } else {
-									 $line .="<font color=\"red\">Unzip was not successful</font><br /><br />";
-									 $line .="<p><button class=\"btn btn-danger btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Start over</button></p>";
+									 $line .= "<font color=\"red\">Unzip was not successful</font><br /><br />";
+									 $line .= "<p><button class=\"btn btn-danger btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Start over</button></p>";
 									 }
 								$_SESSION['installed'] = 'true';	 
 								sleep(5); 
 								// Set file/folder ownership and permissions if on posix
 									if (php_uname('s') != 'Windows NT') {
-										$line .="Setting file and folder permissions: ".php_uname('s');
+										$line .= "Setting file and folder permissions: ".php_uname('s');
 										fixPermissions($completedir);
 									}
 							}
@@ -408,12 +406,13 @@ class module_controller {
 
 	static function getPackageSelection() {
 		global $controller;
-		$toReturn ="";
-		$packages= new xml_reader(fs_filehandler::ReadFileContents("./modules/".$controller->GetControllerRequest('URL', 'module')."/packages/packages.xml"));
+		$toReturn = "";
+		$packages = new xml_reader(fs_filehandler::ReadFileContents("./modules/".$controller->GetControllerRequest('URL', 'module')."/packages/packages.xml"));
 		$packages->Parse();
 
-		$toReturn .="
-		<table class=\"table table-striped\" border=\"0\" width=\"100%\">
+		$toReturn .= "
+		(Sortable columns - click on column header)
+		<table class=\"table table-striped sortable\" border=\"0\" width=\"100%\">
 		  <tr>
 			<th>".ui_language::translate( "Package" )."<br />
 			".ui_language::translate( "Name" )."</th>
@@ -427,16 +426,17 @@ class module_controller {
 			".ui_language::translate( "Required" )."?</th>
 			<th>&nbsp;</th>
 		  </tr>";
+		
 		foreach($packages->document->package as $package){
 			// START - Info and DB tags by tgates
-			if(@$package->db[0]->tagData=='yes') @$package->pkgdb[0]->tagData="yes";
-			else @$package->pkgdb[0]->tagData="no";
+			if($package->db[0]->tagData=='yes') $package->pkgdb[0]->tagData="yes";
+			else $package->pkgdb[0]->tagData="no";
 			if($package->db[0]->tagData=='yes') $package->db[0]->tagData="<font color='green'><strong>".ui_language::translate( "YES" )."</strong></font>";
 			else $package->db[0]->tagData="<font color='red'><strong>".ui_language::translate( "NO" )."</strong></font>";
 			// END - Info and DB tags by tgates
-		$toReturn .="<tr>
-			<th>" .$package->name[0]->tagData. "</th>
-			<th>" .$package->version[0]->tagData. "</th>
+		$toReturn .= "<tr>
+			<td>" .$package->name[0]->tagData. "</td>
+			<td>" .$package->version[0]->tagData. "</td>
 			<td>" .$package->type[0]->tagData. "</td>
 			<td>" .$package->info[0]->tagData. "</td>
 			<td><center>" .$package->db[0]->tagData. "</center></td>
@@ -458,7 +458,7 @@ class module_controller {
 		global $controller;
 		$toReturn ="";
 		if (file_exists("./modules/".$controller->GetControllerRequest('URL', 'module')."/packages/custom_packages.xml")) {
-		$packages= new xml_reader(fs_filehandler::ReadFileContents("./modules/".$controller->GetControllerRequest('URL', 'module')."/packages/custom_packages.xml"));
+		$packages = new xml_reader(fs_filehandler::ReadFileContents("./modules/".$controller->GetControllerRequest('URL', 'module')."/packages/custom_packages.xml"));
 		$packages->Parse();
 
 		foreach($packages->document->package as $package){
@@ -468,20 +468,28 @@ class module_controller {
 			if($package->db[0]->tagData=='yes') $package->db[0]->tagData="<font color='green'><strong>".ui_language::translate( "YES" )."</strong></font>";
 			else $package->db[0]->tagData="<font color='red'><strong>".ui_language::translate( "NO" )."</strong></font>";
 			// END - Info and DB tags by tgates
-		$toReturn .="<tr>
-			<th>" .$package->name[0]->tagData. "</th>
-			<th>" .$package->version[0]->tagData. "</th>
+		$toReturn .= "<tr>
+			<td>" .$package->name[0]->tagData. "</td>
+			<td>" .$package->version[0]->tagData. "</td>
 			<td>" .$package->type[0]->tagData. "</td>
 			<td>" .$package->info[0]->tagData. "</td>
 			<td><center>" .$package->db[0]->tagData. "</center></td>
-			<td><a href='/?module=sentastico&pkgzip=" .$package->zipname[0]->tagData. "&pkg=" .$package->name[0]->tagData. "&pkgdb=" .$package->pkgdb[0]->tagData. "&startinstall=true');\"><button type=\"button\" class=\"btn btn-primary btn-small\">".ui_language::translate( "Install" )."</button></a></td>
- 			</tr>";
+			<td>
+				<form id=\"install\" name=\"Install\" action=\"/?module=sentastico\" method=\"post\">
+				<input type=\"hidden\" name=\"startinstall\" value=\"true\"> 
+				<input type=\"hidden\" name=\"pkgzip\" value=".$package->zipname[0]->tagData."> 
+				<input type=\"hidden\" name=\"pkg\" value='".$package->name[0]->tagData."'> 
+				<input type=\"hidden\" name=\"pkgdb\" value=".$package->pkgdb[0]->tagData."> 
+				<input class=\"btn btn-primary btn-small\" type=\"submit\" name=\"doInstall\" value=". ui_language::translate( "Install" )." />
+				</form>
+			</td>
+		</tr>";
 			}
-			$toReturn .="</table><br />";
+			$toReturn .= "</table><br />";
 		} else { 
-			$toReturn .="</table><br />";
+			$toReturn .= "</table><br />";
 		}
-		//$toReturn .="</form>";
+		//$toReturn .= "</form>";
 		return $toReturn;
 	}
 }

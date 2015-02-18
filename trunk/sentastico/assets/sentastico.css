@@ -1,147 +1,171 @@
 /*
 // Sentastico Open Source Script Installer for Sentora CP
 // File				: sentastico.css
-// Version          : 20.1.0.0 (1-12-2015)
+// Version          : 20.1.2.0 (02-18-2015)
 // Updated By       : TGates for Sentora
-// Additional Work  : Durandle
-// Packages Updated : 05-05-2014 by TGates
+// Additional Work  : Durandle, Mudasir Mirza
 // Contact Email    : tgates@mach-hosting.com
-// Original Authors : Bobby Allen/Mudasir Mirza
+// Original Author  : Bobby Allen
 */
-
+/* Sortable tables */
+table.sortable th {
+	background-color: #CCC;
+	font-weight: bold;
+	cursor: pointer;
+}
 /* Installer */
 .button-align {
 	text-align: right;
 }
-
-form {  
+form {
 	margin: 0;
 	padding: 0;
 }
-
 form fieldset {
 	clear: both;
 	border-color: #000;
 	border-width: 1px;
 	border-style: solid;
-	padding: 10px;        
+	padding: 10px;
 	margin: 0;
 }
-
 form fieldset legend {
-	font-size:1.1em;
+	font-size: 1.1em;
 }
-
 form label {
-    width:180px;
-    float: right;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-    text-align: right;
+	width: 180px;
+	float: right;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	text-align: right;
 }
-
-
 form fieldset label:first-letter {
-	text-decoration:underline;
+	text-decoration: underline;
 }
-
 form input, form textarea {
-	width:150px;
+	width: 150px;
 	margin: 0px 0 0 0px;
 }
-
 form select, form option {
-    width:150px;
-    margin: 0px 0 0 0px;
+	width: 150px;
+	margin: 0px 0 0 0px;
 }
-
 form input#reset {
-	margin-left:0px;
+	margin-left: 0px;
 }
-
 textarea {
 	overflow: auto;
 }
-
 form small {
 	display: block;
 	margin: 0 0 5px 160px;
 	padding: 1px 3px;
 	font-size: 88%;
 }
-
 form .required {
-	font-weight:bold;
+	font-weight: bold;
 }
-
 form br {
-	clear:left;
+	clear: left;
 }
-
 /* tool tip */
 .tooltip {
-    border-bottom: 1px dotted #000000; color: #000000; outline: none;
-    cursor: help; text-decoration: none;
-    position: relative;
+	border-bottom: 1px dotted #000000;
+	color: #000000;
+	outline: none;
+	cursor: help;
+	text-decoration: none;
+	position: relative;
 }
 .tooltip span {
-    margin-left: -999em;
-    position: absolute;
+	margin-left: -999em;
+	position: absolute;
 }
 .tooltip:hover span {
-    border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; 
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
-    font-family: Calibri, Tahoma, Geneva, sans-serif;
-    position: absolute; left: 1em; top: 2em; z-index: 99;
-    margin-left: 0; width: 250px;
+	border-radius: 5px 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+	font-family: Calibri, Tahoma, Geneva, sans-serif;
+	position: absolute;
+	left: 1em;
+	top: 2em;
+	z-index: 99;
+	margin-left: 0;
+	width: 250px;
 }
 .tooltip:hover img {
-    border: 0; margin: -10px 0 0 -55px;
-    float: left; position: absolute;
+	border: 0;
+	margin: -10px 0 0 -55px;
+	float: left;
+	position: absolute;
 }
 .tooltip:hover em {
-    font-family: Candara, Tahoma, Geneva, sans-serif; font-size: 1.2em; font-weight: bold;
-    display: block; padding: 0.2em 0 0.6em 0;
+	font-family: Candara, Tahoma, Geneva, sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	display: block;
+	padding: 0.2em 0 0.6em 0;
 }
-
-.classic { padding: 0.8em 1em; }
-.custom { padding: 0.5em 0.8em 0.8em 2em; }
-* html a:hover { background: transparent; }
-.classic {background: #FFFFAA; border: 1px solid #FFAD33; }
-.critical { background: #FFCCAA; border: 1px solid #FF3334; }
-.help { background: #9FDAEE; border: 1px solid #2BB0D7;	}
-.info { background: #9FDAEE; border: 1px solid #2BB0D7;	}
-.warning { background: #FFFFAA; border: 1px solid #FFAD33; }
-
+.classic {
+	padding: 0.8em 1em;
+}
+.custom {
+	padding: 0.5em 0.8em 0.8em 2em;
+}
+* html a:hover {
+	background: transparent;
+}
+.classic {
+	background: #FFFFAA;
+	border: 1px solid #FFAD33;
+}
+.critical {
+	background: #FFCCAA;
+	border: 1px solid #FF3334;
+}
+.help {
+	background: #9FDAEE;
+	border: 1px solid #2BB0D7;
+}
+.info {
+	background: #9FDAEE;
+	border: 1px solid #2BB0D7;
+}
+.warning {
+	background: #FFFFAA;
+	border: 1px solid #FFAD33;
+}
 /* Spinner */
 #loading {
 	background-color: #666;
 	opacity: 20%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-left: -150px; /* half width of the spinner gif */
-    margin-top: -50px; /* half height of the spinner gif */
-    text-align:center;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -150px; /* half width of the spinner gif */
+	margin-top: -50px; /* half height of the spinner gif */
+	text-align: center;
 	color: #FFF;
-    z-index:1234;
-    overflow: auto;
-    width: 300px; /* width of the spinner gif */
-    height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
-	padding-top: 30px;
+	z-index: 1234;
+	overflow: auto;
+	width: 300px; /* width of the spinner gif */
+	height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
+	padding-top: 18px;
 }
-
 #ggloading {
 	background-color: #666;
 	opacity: 50%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-left: -50px; /* half width of the spinner gif */
-    margin-top: -50px; /* half height of the spinner gif */
-    text-align:center;
-    z-index:1234;
-    overflow: auto;
-    width: 100px; /* width of the spinner gif */
-    height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -50px; /* half width of the spinner gif */
+	margin-top: -50px; /* half height of the spinner gif */
+	text-align: center;
+	z-index: 1234;
+	overflow: auto;
+	width: 100px; /* width of the spinner gif */
+	height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
 }

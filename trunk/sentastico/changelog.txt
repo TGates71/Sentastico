@@ -1,13 +1,23 @@
 // Sentastico Open Source Script Installer for Sentora CP
 // File				: changelog.txt
-// Version          : 20.1.0.0 (1-12-2015)
+// Version          : 20.1.2.0 (02-18-2015)
 // Updated By       : TGates for Sentora
-// Additional Work  : Durandle
-// Packages Updated : 05-05-2014 by TGates
+// Additional Work  : Durandle, Mudasir Mirza
 // Contact Email    : tgates@mach-hosting.com
-// Original Authors : Bobby Allen/Mudasir Mirza
- 
-v20.1.0.0 - 9-14-2014
+// Original Author  : Bobby Allen
+
+v20.1.2.0 - 02-18-2015
+Fixed jQuery bug with sortable tables and Sentora header menu
+(Thanks to Ron-e)
+Updated Wordpress package
+
+v20.1.1.0 - 02-13-2015
+Cleaned up some code
+Fixed some layout issues
+Added sortable columns
+Added more packages (Thanks to community member rafaht)
+
+v20.1.0.0 - 11-03-2014
 Converted for Sentora v1.0.0
 Changed the way files are called. (To work with new non-direct module access security measures.)
 Removed obsolete files. (Merged installer.php and functions.php into controller.ext.php)

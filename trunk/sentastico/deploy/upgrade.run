@@ -1,10 +1,8 @@
 <?php
 // Sentastico Open Source Script Installer for Sentora CP
-// File				: upgrade.run
-// Version          : 20.1.2.0 (02-18-2015)
+// File				: sentora-install.php
 // Updated By       : TGates for Sentora
 // Additional Work  : Durandle, Mudasir Mirza
-// Contact Email    : tgates@mach-hosting.com
 // Original Author  : Bobby Allen
 
 require_once('cnf/db.php');
@@ -19,7 +17,7 @@ require_once('dryden/fs/director.class.php');
 require_once('inc/dbc.inc.php');
 
 //First variable is the new version. Second variable is the module folder name
-UpgradeModule('20120', 'sentastico');
+UpgradeModule('20200', 'sentastico');
 
 function UpgradeModule($newversion, $module){
     global $zdbh;

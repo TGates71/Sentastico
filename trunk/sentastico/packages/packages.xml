@@ -11,25 +11,9 @@
 -->
 <packages>
 <package>
-<name>Super Simple CMS</name>
-<version>0.0.1</version>
-<zipname>sscms</zipname>
-<type>Portals/CMS</type>
-<info>A database driven Content Management System that makes setting up and maintaining your website much simpler and looking better with custom templates and an easy to use admin area for changing images, site content and even the over-all look of  your site.</info>
-<db>yes</db>
-</package>
-<package>
-<name>Platinum Nuke Pro</name>
-<version>1.0.1</version>
-<zipname>pnp101</zipname>
-<type>Portals/CMS</type>
-<info>Platinum Nuke Pro is a highly modified Content Management System (CMS) with lots of new features, mods and other enhancements that takes you far beyond the basic Platinum and phpnuke versions. Featuring Forums, web-based administration, surveys, customizable blocks, modules and themes with multilanguage support.</info>
-<db>yes</db>
-</package>
-<package>
 <name>Joomla</name>
 <version>3.3.0</version>
-<zipname>joomla330</zipname>
+<zipname>joomla_330</zipname>
 <type>Portals/CMS</type>
 <info>Dynamic portal engine and content management system.</info>
 <db>yes</db>
@@ -37,7 +21,7 @@
 <package>
 <name>Wordpress</name>
 <version>4.1</version>
-<zipname>wordpress41</zipname>
+<zipname>wordpress_41</zipname>
 <type>Portals/CMS</type>
 <info>WordPress is web software you can use to create a beautiful website or blog.</info>
 <db>yes</db>
@@ -45,7 +29,7 @@
 <package>
 <name>Drupal</name>
 <version>7.22</version>
-<zipname>drupal722</zipname>
+<zipname>drupal_722</zipname>
 <type>Portals/CMS</type>
 <info>Drupal is an open source content management platform powering millions of websites and applications.</info>
 <db>yes</db>
@@ -53,7 +37,7 @@
 <package>
 <name>PHP-Nuke</name>
 <version>8.2.4</version>
-<zipname>php-nuke824</zipname>
+<zipname>php-nuke_824</zipname>
 <type>Portals/CMS</type>
 <info>Content management and portal solution featuring web-based administration, surveys, customizable blocks, modules and themes with multilanguage support.</info>
 <db>yes</db>
@@ -61,7 +45,7 @@
 <package>
 <name>ImpressPages</name>
 <version>4.0.12</version>
-<zipname>impresspages4012</zipname>
+<zipname>impresspages_4012</zipname>
 <type>Portals/CMS</type>
 <info>Web CMS built on PHP5.3 and MySQL. Efficient tool to create and manage websites. Add more value and peace of mind.</info>
 <db>yes</db>
@@ -69,7 +53,7 @@
 <package>
 <name>MyBB Forum</name>
 <version>1.6.13</version>
-<zipname>mybb1613</zipname>
+<zipname>mybb_1613</zipname>
 <type>Forums</type>
 <info>MyBB is a discussion board that has been around for a while; it has evolved from other bulletin boards into the forum package it is today. Therefore, it is a professional and efficient discussion board, developed by an active team of developers.</info>
 <db>yes</db>
@@ -77,7 +61,7 @@
 <package>
 <name>phpBB</name>
 <version>3.0.12</version>
-<zipname>phpbb3012</zipname>
+<zipname>phpbb_3012</zipname>
 <type>Forums</type>
 <info>phpBB is free and open source forum software that is easy to use, powerful, and highly customisable</info>
 <db>yes</db>
@@ -85,7 +69,7 @@
 <package>
 <name>bbPress</name>
 <version>2.5.4</version>
-<zipname>bbpress254</zipname>
+<zipname>bbpress_254</zipname>
 <type>Forums</type>
 <info>bbPress is forum software with a twist from the creators of WordPress.</info>
 <db>yes</db> 
@@ -93,7 +77,7 @@
 <package>
 <name>Simple Machines Forum</name>
 <version>2.0.7</version>
-<zipname>smf207</zipname>
+<zipname>smf_207</zipname>
 <type>Forums</type>
 <info>SMF - The open source web based forums</info>
 <db>yes</db>
@@ -101,7 +85,7 @@
 <package>
 <name>b2evolution</name>
 <version>5.0.8</version>
-<zipname>b2evolution508</zipname>
+<zipname>b2evolution_508</zipname>
 <type>Blogs</type>
 <info>Open source PHP/ mySQL weblog tool derived from the same code that later became WordPress. Supports multiple categories, sub-categories, etc...</info>
 <db>yes</db>
@@ -109,7 +93,7 @@
 <package>
 <name>osCommerce</name>
 <version>2.3.4</version>
-<zipname>oscommerce234</zipname>
+<zipname>oscommerce_234</zipname>
 <type>E-Commerce</type>
 <info>A free online shop program featuring order history, shopping carts, full search capability, product reviews, secure transactions, bestseller lists, and related items.</info>
 <db>yes</db>
@@ -117,7 +101,7 @@
 <package>
 <name>Zen Cart</name>
 <version>1.5.1</version>
-<zipname>zencart151</zipname>
+<zipname>zencart_151</zipname>
 <type>E-Commerce</type>
 <info>Zen Cart® truly is the art of e-commerce; free, user-friendly, open source shopping cart software</info>
 <db>yes</db>
@@ -125,7 +109,7 @@
 <package>
 <name>PrestaShop</name>
 <version>1.6.0.11</version>
-<zipname>prestashop16011</zipname>
+<zipname>prestashop_16011</zipname>
 <type>E-Commerce</type>
 <info>Create your online store with PrestaShop's free shopping cart software. Build an ecommerce website for free and start selling online with hundreds of powerful features.</info>
 <db>yes</db> 
@@ -133,7 +117,7 @@
 <package>
 <name>Magento</name>
 <version>1.9.1.0</version>
-<zipname>magento1910</zipname>
+<zipname>magento_1910</zipname>
 <type>E-Commerce</type>
 <info>Magento is the eCommerce software and platform trusted by the world's leading brands.</info>
 <db>yes</db> 
@@ -141,7 +125,7 @@
 <package>
 <name>4images</name>
 <version>1.7.11</version>
-<zipname>4images1711</zipname>
+<zipname>4images_1711</zipname>
 <type>Image galleries</type>
 <info>4images is a PHP and MySQL based system to administrate image galleries and media databases.</info>
 <db>yes</db>
@@ -149,7 +133,7 @@
 <package>
 <name>Gallery</name>
 <version>3.0.9</version>
-<zipname>gallery309</zipname>
+<zipname>gallery_309</zipname>
 <type>Image galleries</type>
 <info>Free, open source, photo management system. Photo management includes automatic thumbnail creation, image resizing, rotation, ordering, captioning, etc...</info>
 <db>yes</db>
@@ -157,7 +141,7 @@
 <package>
 <name>Coppermine</name>
 <version>1.5.28</version>
-<zipname>coppermine1528</zipname>
+<zipname>coppermine_1528</zipname>
 <type>Image galleries</type>
 <info>Coppermine is a multi-purpose fully-featured and integrated web picture gallery script written in PHP using GD or ImageMagick as image library with a MySQL backend.</info>
 <db>yes</db>
@@ -165,7 +149,7 @@
 <package>
 <name>Moodle</name>
 <version>2.6</version>
-<zipname>moodle26</zipname>
+<zipname>moodle_26</zipname>
 <type>CMS/LMS/VLE</type>
 <info>Moodle is a Course Management System (CMS), also known as a Learning Management System (LMS) or a Virtual Learning Environment (VLE). It is a Free web application that educators can use to create effective online learning sites.</info>
 <db>yes</db>
@@ -173,7 +157,7 @@
 <package>
 <name>Crafty Syntax</name>
 <version>3.4.4</version>
-<zipname>craftysyntax344</zipname>
+<zipname>craftysyntax_344</zipname>
 <type>Live Support</type>
 <info>Crafty Syntax Live Help is a live support application. highlighted features include the ability to create your own questions, auto inviting visitors, referrer tracking, page tracking.. and more.</info>
 <db>yes</db>
@@ -181,7 +165,7 @@
 <package>
 <name>Hesk</name>
 <version>2.5.5</version>
-<zipname>hesk255</zipname>
+<zipname>hesk_255</zipname>
 <type>Live Support</type>
 <info>Hesk is Free PHP Help Desk Software that runs with a MySQL database. It allows you to setup a web based ticket support system (helpdesk) for your website.</info>
 <db>yes</db> 
@@ -189,7 +173,7 @@
 <package>
 <name>osTicket</name>
 <version>1.5.9.1</version>
-<zipname>osticket1591</zipname>
+<zipname>osticket_1591</zipname>
 <type>Live Support</type>
 <info>osTicket is a widely-used and trusted open source support ticket system. It seamlessly routes inquiries created via email, web-forms and phone calls into a simple, easy-to-use, multi-user, web-based customer support platform.</info>
 <db>yes</db> 
@@ -197,7 +181,7 @@
 <package>
 <name>DokuWiki</name>
 <version>2013-12-08</version>
-<zipname>dokuwiki20131208</zipname>
+<zipname>dokuwiki_20131208</zipname>
 <type>Wiki</type>
 <info>DokuWiki is a simple to use and highly versatile Open Source wiki software that doesn't require a database.</info>
 <db>no</db>
@@ -205,7 +189,7 @@
 <package>
 <name>MediaWiki</name>
 <version>1.24.1</version>
-<zipname>mediawiki1241</zipname>
+<zipname>mediawiki_1241</zipname>
 <type>Wiki</type>
 <info>MediaWiki is a free software open source wiki package written in PHP, originally for use on Wikipedia.</info>
 <db>yes</db> 

@@ -1,10 +1,8 @@
 <!--
 // Sentastico Open Source Script Installer for Sentora CP
-// File				: module.zpm
-// Version          : 20.1.2.0 (02-18-2015)
+// File				: sentora-install.php
 // Updated By       : TGates for Sentora
 // Additional Work  : Durandle, Mudasir Mirza
-// Contact Email    : tgates@mach-hosting.com
 // Original Author  : Bobby Allen
 -->
 <@ Init @>
@@ -28,15 +26,7 @@
         <div class="zform_wrapper">
             <h2><: Sentastico Packages :>:</h2>
                 <@ PackageSelection @>
-                <@ CustomPackageSelection @>
         </div>
     <% endif %>
-<font face="ariel" size="1">Sentastico 20.1.2.0 by <a href="http://www.mach-hosting.com">TGates</a></font>
-<form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-    <input type="hidden" name="cmd" value="_s-xclick"/>
-    <input type="hidden" name="hosted_button_id" value="RGCT6MKNG6RJW"/>
-    <input type="submit" value="Donate via PayPal" name="submit"/>
-    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
-</form>
-
+<@ Copyright @>
 </div>

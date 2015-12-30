@@ -112,26 +112,6 @@ function UnZip($zipfile,$dest_dir,$site_domain,$dir_to_install){
     }
 }
 
-// Fix permissions of installed files since they will automatically be set to                       
-// the apache user and group                                                                        
-function fixPermissions($completedir){                                                         
-    $sysOS = php_uname('s');                                                                        
-    $zsudo = ctrl_options::GetOption('zsudo');                                                      
-                                                                                                    
-    switch($sysOS){                                                                                 
-        case 'Linux':                                                                               
-            exec("$zsudo chown -R ftpuser.ftpgroup " . $completedir);                               
-            exec("$zsudo chmod -R 777 " . $completedir);                                            
-        break;                                                                                      
-        case 'Unix':                                                                                
-            exec("$zsudo chown -R ftpuser:ftpgroup " . $completedir);                               
-            exec("$zsudo chmod -R 777 " . $completedir);                                            
-        break;                                                                                      
-        default:                                                                                    
-            //windows or incompilable operating system !!Do Nothing!!                               
-        break;                                                                                      
-    }                                                                                               
-}
 
 // Function to retrieve remote XML for update check
 function check_remote_xml($xmlurl,$destfile){

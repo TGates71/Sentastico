@@ -1,8 +1,8 @@
 <!--
 // Sentastico Open Source Script Installer for Sentora CP
-// File				: sentora-install.php
 // Updated By       : TGates for Sentora
 // Additional Work  : Durandle, Mudasir Mirza
+// Contact Email    : tgates@mach-hosting.com
 // Original Author  : Bobby Allen
 -->
 <@ Init @>
@@ -23,10 +23,57 @@
             <@ RunInstallerForm @>
         </div>
      <% else %>
+			<% if IsAdmin %>
+			<!-- Menu Start -->
+			<div class="tab-menu" role="tabpanel">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" id="tablist" role="tablist">
+					<li class="active" role="presentation">
+						<a href="#sen_admin" aria-controls="sen_admin" role="tab" data-toggle="tab"><: Admin :></a>
+					</li>
+					<li role="presentation">
+						<a href="#sentastico" aria-controls="sentastico" role="tab" data-toggle="tab"><: Sentastico :></a>
+					</li>
+					<li>
+						<a href="?module=sentastico"><: Refresh List :></a>
+					</li>
+				</ul>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<!-- Admin -->
+					<div role="tabpanel" class="tab-pane active" id="sen_admin">
+						<@ SentasticoAdmin @>
+						<button class="btn btn-success" onclick="location.reload()"><: Reload :></button>
+						<p></p>
+					</div>
+					<!-- Package Selection -->
+					<div role="tabpanel" class="tab-pane" id="sentastico">
+						<@ PackageSelection @>
+					</div>
+				</div>
+			</div>
+		<% else %>
         <div class="zform_wrapper">
             <h2><: Sentastico Packages :>:</h2>
                 <@ PackageSelection @>
         </div>
+		<% endif %>
     <% endif %>
-<@ Copyright @>
+	<div>
+		<@ Copyright @>
+	</div>
 </div>
+<script>
+	$(function() { 
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+			// save the latest tab; use cookies if you like 'em better:
+			localStorage.setItem('lastTab', $(this).attr('href'));
+		});
+	
+		// go to the latest tab, if it exists:
+		var lastTab = localStorage.getItem('lastTab');
+		if (lastTab) {
+			$('[href="' + lastTab + '"]').tab('show');
+		}
+	});
+</script>

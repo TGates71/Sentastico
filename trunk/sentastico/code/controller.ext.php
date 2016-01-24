@@ -1,8 +1,8 @@
 <?php
 // Sentastico Open Source Script Installer for Sentora CP
-// File				: sentora-install.php
 // Updated By       : TGates for Sentora
 // Additional Work  : Durandle, Mudasir Mirza
+// Contact Email    : tgates@sentora.org
 // Original Author  : Bobby Allen
 
 // List domains in DropDown Menu
@@ -120,11 +120,11 @@ function fixPermissions($completedir){
                                                                                                     
     switch($sysOS){                                                                                 
         case 'Linux':                                                                               
-            exec("$zsudo chown -R ftpuser.ftpgroup " . $completedir);                               
+            exec("$zsudo chown -R apache.apache " . $completedir);                               
             exec("$zsudo chmod -R 777 " . $completedir);                                            
         break;                                                                                      
         case 'Unix':                                                                                
-            exec("$zsudo chown -R ftpuser:ftpgroup " . $completedir);                               
+            exec("$zsudo chown -R apache:apache " . $completedir);                               
             exec("$zsudo chmod -R 777 " . $completedir);                                            
         break;                                                                                      
         default:                                                                                    
@@ -206,8 +206,14 @@ class module_controller {
         global $controller;
 		// load module spcific style sheet
         $line = '<link rel="stylesheet" type="text/css" href="modules/'.$controller->GetControllerRequest('URL', 'module').'/assets/sentastico.css">';
+        $line .= '<link rel="stylesheet" type="text/css" href="modules/'.$controller->GetControllerRequest('URL', 'module').'/assets/sentastico_admin.css">';
 		// load module spcific JS
 		$line .= '<script src="modules/'.$controller->GetControllerRequest('URL', 'module').'/assets/sorttable.js"></script>';
+		$line .= '<script language="javascript" type="text/javascript">
+		  function resizeIframe(obj) {
+			obj.style.height = obj.contentWindow.document.body.scrollHeight + "px";
+		  }
+		</script>';
         return $line;
     }
 
@@ -234,6 +240,30 @@ class module_controller {
         	return false;
         }
     }
+
+    static function getIsAdmin() {
+		$currentuser = ctrl_users::GetUserDetail();
+		$currentusergid = $currentuser['usergroupid'];
+        if ($currentusergid == "1") {
+			return true;
+		} else {
+        	return false;
+        }
+    }
+
+	// Load external Sentastico Admin file.
+	static function getSentasticoAdmin() {
+		$toReturn = "<iframe
+						id=\"iframe\"
+						width=\"100%\"
+						height=\"500px\"
+						frameborder=\"0\"
+						scrolling=\"no\"
+						onload=\"resizeIframe(this)\"
+						src=\"modules/sentastico/code/sentastico_admin.php\" >
+					</iframe>";
+		return $toReturn;
+	}
 
 	// Package installer
     static function getRunInstallerForm() {
@@ -403,12 +433,14 @@ class module_controller {
 }
 
 	static function getPackageSelection() {
-		global $controller;
+		global $zdbh, $controller;
 		$toReturn = "";
-		$packages = new xml_reader(fs_filehandler::ReadFileContents("./modules/".$controller->GetControllerRequest('URL', 'module')."/packages/packages.xml"));
-		$packages->Parse();
+		// get package list from database
+		$sql="SELECT * FROM x_sentastico";
+		$numrows = $zdbh->query($sql);
 
 		$toReturn .= "
+		<div>
 		(Sortable columns - click on column header)
 		<table class=\"table table-striped sortable\" border=\"0\" width=\"100%\">
 		  <tr>
@@ -424,43 +456,55 @@ class module_controller {
 			".ui_language::translate( "Required" )."?</th>
 			<th>&nbsp;</th>
 		  </tr>";
+		  // check to see if any packages exist
+		  $res = $zdbh->prepare('SELECT COUNT(*) FROM x_sentastico');
+		  $res->execute();
+		  $num_rows = $res->fetchColumn();
+
+		if ($num_rows != 0) {
+			$sql = $zdbh->prepare($sql);
+			$sql->execute();
 		
-		foreach($packages->document->package as $package){
+		while ($rowsettings = $sql->fetch()){
 			// START - Info and DB tags by tgates
-			if($package->db[0]->tagData=='yes') $package->pkgdb[0]->tagData="yes";
-			else $package->pkgdb[0]->tagData="no";
-			if($package->db[0]->tagData=='yes') $package->db[0]->tagData="<font color='green'><strong>".ui_language::translate( "YES" )."</strong></font>";
-			else $package->db[0]->tagData="<font color='red'><strong>".ui_language::translate( "NO" )."</strong></font>";
+			//if ($rowsettings['pkg_db']=='yes') $rowsettings['pkg_db'] = "yes";
+			//else $rowsettings['pkg_db']="no";
+			if ($rowsettings['pkg_db']=='yes') $rowsettings['pkg_dbr'] = "<font color='green'><strong>".ui_language::translate( "YES" )."</strong></font>";
+			else $rowsettings['pkg_dbr'] = "<font color='red'><strong>".ui_language::translate( "NO" )."</strong></font>";
 			// END - Info and DB tags by tgates
 		$toReturn .= "<tr>
-			<td>" .$package->name[0]->tagData. "</td>
-			<td>" .$package->version[0]->tagData. "</td>
-			<td>" .$package->type[0]->tagData. "</td>
-			<td>" .$package->info[0]->tagData. "</td>
-			<td><center>" .$package->db[0]->tagData. "</center></td>
+			<td>" .$rowsettings['pkg_name']. "</td>
+			<td>" .$rowsettings['pkg_version']. "</td>
+			<td>" .$rowsettings['pkg_type']. "</td>
+			<td>" .$rowsettings['pkg_info']. "</td>
+			<td><center>" .$rowsettings['pkg_dbr']. "</center></td>
 			<td>
 				<form id=\"install\" name=\"Install\" action=\"/?module=sentastico\" method=\"post\">
 				<input type=\"hidden\" name=\"startinstall\" value=\"true\"> 
-				<input type=\"hidden\" name=\"pkgzip\" value=".$package->zipname[0]->tagData."> 
-				<input type=\"hidden\" name=\"pkg\" value='".$package->name[0]->tagData."'> 
-				<input type=\"hidden\" name=\"pkgdb\" value=".$package->pkgdb[0]->tagData."> 
+				<input type=\"hidden\" name=\"pkgzip\" value=".$rowsettings['pkg_zipname']."> 
+				<input type=\"hidden\" name=\"pkg\" value='".$rowsettings['pkg_name']."'> 
+				<input type=\"hidden\" name=\"pkgdb\" value=".$rowsettings['pkg_db']."> 
 				<input class=\"btn btn-primary btn-small\" type=\"submit\" name=\"doInstall\" value=". ui_language::translate( "Install" )." />
 				</form>
 			</td>
 		</tr>";
 			}
+		} else {
+			$toReturn .= "<tr><td colspan='6'>There are no packages installed. Please contact your server administrator.</td></tr>";
+		}
+			$toReturn .= "</table>";
 		return $toReturn;
 	}
 
     static function getCopyright() {
-        $message = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v20.2.0.0 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a>&nbsp;&#8212;&nbsp;Help support future development of this module and donate today!</font>
+        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v25.0.0.0 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a>&nbsp;&#8212;&nbsp;Help support future development of this module and donate today!</font>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="DW8QTHWW4FMBY">
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" width="70" height="21" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>';
-        return $message;
+        return $copyright;
     }
 
 }

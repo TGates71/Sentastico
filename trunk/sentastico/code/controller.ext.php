@@ -111,7 +111,13 @@ function UnZip($zipfile,$dest_dir,$site_domain,$dir_to_install){
 		 return false;
     }
 }
+// Fix permissions of installed files since they will automatically be set to
+// the apache user and group
+function fixPermissions($completedir){
+    $sysOS = php_uname('s');
+    $zsudo = ctrl_options::GetOption('zsudo');
 
+<<<<<<< HEAD
 // Fix permissions of installed files since they will automatically be set to                       
 // the apache user and group                                                                        
 function fixPermissions($completedir){                                                         
@@ -131,6 +137,21 @@ function fixPermissions($completedir){
             //windows or incompilable operating system !!Do Nothing!!                               
         break;                                                                                      
     }                                                                                               
+=======
+    switch($sysOS){
+        case 'Linux':
+           // exec("$zsudo chown -R ftpuser.ftpgroup " . $completedir);
+            exec("$zsudo chmod -R 777 " . $completedir);
+        break;
+        case 'Unix':
+           // exec("$zsudo chown -R ftpuser:ftpgroup " . $completedir);
+            exec("$zsudo chmod -R 777 " . $completedir);
+        break;
+        default:
+            //windows or incompilable operating system !!Do Nothing!!
+        break;
+    }
+>>>>>>> origin/master
 }
 
 // Function to retrieve remote XML for update check

@@ -17,7 +17,7 @@ require_once('dryden/fs/director.class.php');
 require_once('inc/dbc.inc.php');
 
 //First variable is the new version. Second variable is the module folder name
-UpgradeModule('25000', 'sentastico');
+UpgradeModule('25001', 'sentastico');
 
 function UpgradeModule($newversion, $module){
     global $zdbh;

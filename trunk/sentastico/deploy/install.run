@@ -16,6 +16,7 @@ require_once('dryden/ctrl/users.class.php');
 require_once('dryden/fs/director.class.php');
 require_once('inc/dbc.inc.php');
 
+// Install DB table
 function installModule(){
     global $zdbh;
 

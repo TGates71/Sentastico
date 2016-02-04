@@ -4,6 +4,9 @@
 // Contact Email    : tgates@mach-hosting.com
 // Original Author  : Bobby Allen
 
+v25.0.0.1 - 01-25-2016
+Added file and folder permissions fix.
+
 v25.0.0.0 - 01-22-2016
 Rebuilt to include Admin functions (Add and remove packages from a central repository)
 -package info now stored in database

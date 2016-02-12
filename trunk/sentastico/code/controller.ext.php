@@ -5,30 +5,6 @@
 // Contact Email    : tgates@sentora.org
 // Original Author  : Bobby Allen
 
-// Make sure module permissions are set properly
-/*
-function fixFolderPermissions(){
-
-    $mod_path = 'modules/sentastico/';
-    $sysOS = php_uname('s');
-    $zsudo = ctrl_options::GetOption('zsudo');
-
-    switch($sysOS){
-        case 'Linux':
-            exec("$zsudo chown -R apache.apache " . $mod_path);
-            exec("$zsudo chmod -R 755 " . $mod_path);
-        break;
-        case 'Unix':
-            exec("$zsudo chown -R apache:apache " . $mod_path);
-            exec("$zsudo chmod -R 755 " . $mod_path);
-        break;
-        default:
-            //windows or incompilable operating system !!Do Nothing!!
-        break;
-    }
-}
-fixFolderPermissions();
-*/
 // List domains in DropDown Menu
 function ListDomain($uid){
     global $zdbh;
@@ -317,7 +293,7 @@ class module_controller {
 								if ($pkgdb == "yes") {
 										$line .= "<font color=\"red\"><strong>".ui_language::translate ("This package requires a database and database user.")."</strong></font><br /><br />";
 										$line .= "<a target=\"_blank\" href=\"../../../?module=mysql_databases\">&raquo;Open&laquo; </a>".ui_language::translate ("database manager.")."<br />";
-										$line .= "<a target=\"_blank\" href=\"../../../?module=mysql_users\">&raquo;Open&laquo; </a> ".ui_language::translate ("database user manager.")."";
+										$line .= "<a target=\"_blank\" href=\"../../../?module=mysql_users\">&raquo;Open&laquo; </a>".ui_language::translate ("database user manager.")."";
 										$line .= "<p>&nbsp;</p>";
 									}
 										$line .= "<p>".ui_language::translate ("Please provide the domain and folder name to start the installation of")." ".$pkgInstall.".</p>";
@@ -521,7 +497,7 @@ class module_controller {
 	}
 
     static function getCopyright() {
-        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v25.0.0.1 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a>&nbsp;&#8212;&nbsp;Help support future development of this module and donate today!</font>
+        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v25.0.0.2 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a>&nbsp;&#8212;&nbsp;Help support future development of this module and donate today!</font>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="DW8QTHWW4FMBY">

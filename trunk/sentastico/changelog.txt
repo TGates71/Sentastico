@@ -4,7 +4,7 @@
 // Contact Email    : tgates@mach-hosting.com
 // Original Author  : Bobby Allen
 
-v25.0.0.1 - 01-25-2016
+v25.0.0.2 - 01-25-2016
 Added file and folder permissions fix.
 
 v25.0.0.0 - 01-22-2016

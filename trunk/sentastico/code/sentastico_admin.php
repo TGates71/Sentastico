@@ -20,19 +20,20 @@ if (!$_SESSION['zpuid']) {
 
 // use Sentora_Default css and js
 ?>
-	<!-- Stylesheets -->
-	<link href="../../../modules/sentastico/assets/bootstrap.min.css" rel="stylesheet">
-	<link href="../../../modules/sentastico/assets/default.css" rel="stylesheet" type="text/css">
-	<!-- Javascripts -->
-	<script src="../../../modules/sentastico/assets/jquery.js"></script>
-	<script src="../../../modules/sentastico/assets/bootstrap-tab.js"></script>
-	<script src="../../../modules/sentastico/assets/sorttable.js"></script>
+<!-- Stylesheets -->
+<link href="../../../modules/sentastico/assets/bootstrap.min.css" rel="stylesheet">
+<link href="../../../modules/sentastico/assets/default.css" rel="stylesheet" type="text/css">
+<!-- Javascripts -->
+<script src="../../../modules/sentastico/assets/jquery.js"></script>
+<script src="../../../modules/sentastico/assets/bootstrap-tab.js"></script>
+<script src="../../../modules/sentastico/assets/sorttable.js"></script>
 <?php
 // set packages path
 $path = '../../../modules/sentastico/packages/';
-$pkg_delete = $_POST['pkg_zipname'];
 
-if (isset($pkg_delete)) {
+if (isset($_POST['pkg_zipname'])) {
+	$pkg_delete = $_POST['pkg_zipname'];
+
 	$PathFile = $path.$pkg_delete;
 	// remove package zip file
 	unlink($PathFile);
@@ -59,12 +60,12 @@ $sql->execute();
 $packagesDB = $sql->fetchAll();
 
 // get available packages from server
+// convert to use remote XML file
 $file = "http://sen-packs.mach-hosting.com/packages.txt";
 $file_headers = @get_headers($file);
 $packageList = file($file);
 $packageList = array_map('trim', $packageList);
 $packageList = array_values($packageList);
-// convert the above to use remote XML file
 
 // install a package
 if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POST['pkg']))) {
@@ -133,18 +134,18 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 			  
 			  // put variables into array
 			  $xmlArray = array();
-			  $xmlArray[name] = $name;
-			  $xmlArray[version] = $version;
-			  $xmlArray[zipname] = $zipname;
-			  $xmlArray[type] = $type;
-			  $xmlArray[info] = $info;
-			  $xmlArray[db] = $db;
+			  $xmlArray['name'] = $name;
+			  $xmlArray['version'] = $version;
+			  $xmlArray['zipname'] = $zipname;
+			  $xmlArray['type'] = $type;
+			  $xmlArray['info'] = $info;
+			  $xmlArray['db'] = $db;
 			}
 		  }
 		}
 	  } 
 		return $xmlArray;
-} //end function
+} // end function
 
 		$packageXml = getPackageXml($path.$newPkgFname);
 
@@ -235,8 +236,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 					}
 					?>
 							<td><span class="form_text"><?php echo $package_name; ?></span>
-								  <input type="hidden" name="install" value="install"></td>
-							<!-- <td><span class="form_text"><?php echo $package_desc; ?></span></td> -->
+							    <input type="hidden" name="install" value="install"></td>
 							<td><span class="form_text"><?php echo $package_version; ?></span></td>
 				<?php } ?>
 						</tr>
@@ -279,7 +279,6 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 				<form name="pkg_delete" method="post">
 					<td><button class="btn btn-danger" type="button" onclick="submit();">Delete</button></td>
 					<td><span class="form_text"><?php echo $packageLname; ?></span></td>
-					<!-- <td><span class="form_text"><?php echo $packageLdesc; ?></span></td> -->
 					<td><span class="form_text"><?php echo $packageLVers; ?></span></td>
 					<input type="hidden" name="pkg_zipname" value="<?php echo $packageL; ?>">
 					<input type="hidden" name="pkg_del" value="delete">

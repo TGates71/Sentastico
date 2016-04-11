@@ -44,16 +44,16 @@ function fixPermissions(){
 		switch($sysOS){
 	case 'Linux':
 	if (file_exists($checkredhat)) {
-							system("/bin/chmod -R 0755 ".$mod_path);
-							system("/bin/chown -R apache:apache ".$mod_path);
+		system("/bin/chmod -R 0755 ".$mod_path);
+		system("/bin/chown -R apache:apache ".$mod_path);
 	} else {
-							system("/bin/chmod -R 0755 ".$mod_path);
-							system("/bin/chown -R www-data:www-data ".$mod_path);
+		system("/bin/chmod -R 0755 ".$mod_path);
+		system("/bin/chown -R www-data:www-data ".$mod_path);
 	}
 	break;
 	default:
-				//windows or incompilable operating system !!Do Nothing!!
-			break;
+		//windows or incompilable operating system !!Do Nothing!!
+	break;
 	} 
 }
 fixPermissions();

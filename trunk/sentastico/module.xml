@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module>
     <name>Sentastico</name>
-    <version>25002</version>
+    <version>30000</version>
     <defaultcat>Advanced</defaultcat>
     <type>user</type>
 	<ostype>all</ostype>
@@ -9,5 +9,5 @@
 	<authorname>T.Gates, B.Allen</authorname>
     <authoremail>tgates@sentora.org</authoremail>
     <authorurl>http://www.sentora.org</authorurl>
-    <updateurl>http://mach-hosting.tk/repo/sentastico.xml</updateurl>
+    <updateurl>http://zppy-repo.mach-hosting.com/repo/sentastico.xml</updateurl>
 </module>

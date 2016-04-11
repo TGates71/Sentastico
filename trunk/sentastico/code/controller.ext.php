@@ -497,7 +497,7 @@ class module_controller {
 	}
 
     static function getCopyright() {
-        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v25.0.0.2 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a>&nbsp;&#8212;&nbsp;Help support future development of this module and donate today!</font>
+        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v30.0.0.0 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a>&nbsp;&#8212;&nbsp;Help support future development of this module and donate today!</font>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="DW8QTHWW4FMBY">

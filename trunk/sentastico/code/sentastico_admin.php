@@ -50,11 +50,12 @@ if (isset($_POST['pkg_zipname'])) {
 }
 
 // get installed packages
+// convert to use local DB
 $ignore = Array(".", "..", ".htaccess", "thumbs.db", "index.html", "packages.xml");
 $packagesL = array_diff(scandir($path), $ignore);
 $packagesL = array_map('trim', $packagesL);
 $packagesL = array_values($packagesL);
-// convert the above to use local DB
+
 $sql = $zdbh->prepare("SELECT * FROM x_sentastico");
 $sql->execute();
 $packagesDB = $sql->fetchAll();
@@ -217,7 +218,6 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 					<tr class='form_header'>
 						<th>Action</th>
 						<th>Name</th>
-						<!-- <th>Description</th> -->
 						<th>Version</th>
 					</tr>
 				<?php
@@ -266,7 +266,6 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 				<tr class='form_header'>
 					<th>Action</th>
 					<th>Package name</th>
-					<!-- <th>Description</th> -->
 					<th>Version</th>
 				</tr>
 			<?php

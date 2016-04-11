@@ -291,6 +291,9 @@ class module_controller {
 						$line ="<h2>".ui_language::translate ("Preparing to install")." ".$pkgInstall.":</h2>";
 							if (!isset($startinstall)) {
 								if ($pkgdb == "yes") {
+						$line ="<h2>".ui_language::translate ("Preparing to install")." ".$pkgInstall.":</h2>";
+							if (!isset($startinstall)) {
+								if ($pkgdb == "yes") {
 										$line .= "<font color=\"red\"><strong>".ui_language::translate ("This package requires a database and database user.")."</strong></font><br /><br />";
 										$line .= "<a target=\"_blank\" href=\"../../../?module=mysql_databases\">&raquo;Open&laquo; </a>".ui_language::translate ("database manager.")."<br />";
 										$line .= "<a target=\"_blank\" href=\"../../../?module=mysql_users\">&raquo;Open&laquo; </a>".ui_language::translate ("database user manager.")."";

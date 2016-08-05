@@ -4,6 +4,9 @@
 // Contact Email    : tgates@mach-hosting.com
 // Original Author  : Bobby Allen
 
+v30.0.1.0 - 08-05-2016
+Changed repository path to work with new repository website.
+
 v30.0.0.0 - 04-11-2016
 Fixed some php notices. https://github.com/TGates71/Sentastico/commit/1f44d522708a611ac4b4664bb1855c37bb328ca9
 

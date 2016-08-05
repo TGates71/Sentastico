@@ -62,7 +62,7 @@ $packagesDB = $sql->fetchAll();
 
 // get available packages from server
 // convert to use remote XML file
-$file = "http://sen-packs.mach-hosting.com/packages.txt";
+$file = "http://sen-packs.mach-hosting.com/packages/packages.txt";
 $file_headers = @get_headers($file);
 $packageList = file($file);
 $packageList = array_map('trim', $packageList);
@@ -81,11 +81,11 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 	// download the package if not already on the server
 	if (!is_file($path.$newPkgFname)) {
 		$parse = curl_init();
-		$source = "http://sen-packs.mach-hosting.com/".$newPkgFname;
+		$source = "http://sen-packs.mach-hosting.com/packages/".$newPkgFname;
 		curl_setopt($parse, CURLOPT_URL, $source);
 		curl_setopt($parse, CURLOPT_RETURNTRANSFER, 1);
-		$data = curl_exec ($parse);
-		curl_close ($parse);
+		$data = curl_exec($parse);
+		curl_close($parse);
 
 		$destination = $path.$newPkgFname;
 		$file = fopen($destination, "w+");
@@ -153,6 +153,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 		if (!isset($packageXml['name'])) {
 			echo "<meta http-equiv=\"refresh\" content=\"5\"/>";
 			echo "<p>&nbsp;</p>";
+			echo "Package: ".$packageXml;
 			echo "<div class=\"alert alert-danger\">Error getting package information. Try again later.<br />If problem persists, contact your server administrator.</div>";
 			echo "<p>&nbsp;</p>";
 			// remove package zip file

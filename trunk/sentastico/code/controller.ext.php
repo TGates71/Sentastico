@@ -193,7 +193,7 @@ class module_controller {
         include(ctrl_options::GetOption('sentora_root').'/cnf/db.php');
 
         // Updates
-        $v_update_sql = $zdbh->prepare("UPDATE x_modules SET mo_version_in=20100 WHERE mo_name_vc='".ui_module::GetModuleName()."'");
+        $v_update_sql = $zdbh->prepare("UPDATE x_modules SET mo_version_in=30010 WHERE mo_name_vc='".ui_module::GetModuleName()."'");
         $v_update_sql->execute();
     }
 
@@ -288,9 +288,6 @@ class module_controller {
 						$random=rand();
 						$sysOS=php_uname('s');
 
-						$line ="<h2>".ui_language::translate ("Preparing to install")." ".$pkgInstall.":</h2>";
-							if (!isset($startinstall)) {
-								if ($pkgdb == "yes") {
 						$line ="<h2>".ui_language::translate ("Preparing to install")." ".$pkgInstall.":</h2>";
 							if (!isset($startinstall)) {
 								if ($pkgdb == "yes") {
@@ -500,7 +497,7 @@ class module_controller {
 	}
 
     static function getCopyright() {
-        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v30.0.0.0 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a>&nbsp;&#8212;&nbsp;Help support future development of this module and donate today!</font>
+        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v30.0.1.0 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a>&nbsp;&#8212;&nbsp;Help support future development of this module and donate today!</font>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="DW8QTHWW4FMBY">

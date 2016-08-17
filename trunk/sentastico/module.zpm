@@ -29,21 +29,21 @@
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" id="tablist" role="tablist">
 					<li class="active" role="presentation">
-						<a href="#sen_admin" aria-controls="sen_admin" role="tab" data-toggle="tab"><: Admin :></a>
+						<a onClick="window.location.reload()" href="#sen_admin" aria-controls="sen_admin" role="tab" data-toggle="tab"><: Admin :></a>
 					</li>
 					<li role="presentation">
-						<a href="#sentastico" aria-controls="sentastico" role="tab" data-toggle="tab"><: Sentastico :></a>
+						<a onClick="window.location.reload()" href="#sentastico" aria-controls="sentastico" role="tab" data-toggle="tab"><: Sentastico :></a>
 					</li>
-					<li>
+					<!--<li>
 						<a href="?module=sentastico"><: Refresh List :></a>
-					</li>
+					</li>-->
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<!-- Admin -->
 					<div role="tabpanel" class="tab-pane active" id="sen_admin">
 						<@ SentasticoAdmin @>
-						<button class="btn btn-success" onclick="location.reload()"><: Reload :></button>
+						<!--<button class="btn btn-success" onclick="location.reload()"><: Reload :></button>-->
 						<p></p>
 					</div>
 					<!-- Package Selection -->

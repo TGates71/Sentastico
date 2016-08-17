@@ -193,10 +193,10 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" id="tablist" role="tablist">
         <li class="active" role="presentation">
-			<a href="#sen_add" aria-controls="sen_add" role="tab" data-toggle="tab">Add Packages</a>
+			<a  onClick="window.location.reload()" href="#sen_add" aria-controls="sen_add" role="tab" data-toggle="tab">Add Packages</a>
         </li>
         <li role="presentation">
-            <a href="#sen_del" aria-controls="sen_del" role="tab" data-toggle="tab">Remove Packages</a>
+            <a  onClick="window.location.reload()" href="#sen_del" aria-controls="sen_del" role="tab" data-toggle="tab">Remove Packages</a>
         </li>
 	</ul>
 	<!-- Tab panes -->

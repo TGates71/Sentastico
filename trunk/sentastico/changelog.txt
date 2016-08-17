@@ -4,6 +4,13 @@
 // Contact Email    : tgates@mach-hosting.com
 // Original Author  : Bobby Allen
 
+v30.0.1.2 - 08-17-2016
+Removed reload and refresh links.
+Made lists auto-refresh when clicked.
+
+v30.0.1.1 - 08-17-2016
+Fixed typo in the install links.
+
 v30.0.1.0 - 08-05-2016
 Changed repository path to work with new repository website.
 

@@ -41,16 +41,16 @@ function fixPermissions(){
 	$sysOS = PHP_OS;
 	$checkredhat = '/etc/redhat-release';
 	$mod_path = '/etc/sentora/panel/modules/sentastico/packages';
-		switch($sysOS){
+	switch($sysOS){
 	case 'Linux':
-	if (file_exists($checkredhat)) {
-		system("/bin/chmod -R 0755 ".$mod_path);
-		system("/bin/chown -R apache:apache ".$mod_path);
-	} else {
-		system("/bin/chmod -R 0755 ".$mod_path);
-		system("/bin/chown -R www-data:www-data ".$mod_path);
-	}
-	break;
+		if (file_exists($checkredhat)) {
+			system("/bin/chmod -R 0755 ".$mod_path);
+			system("/bin/chown -R apache:apache ".$mod_path);
+		} else {
+			system("/bin/chmod -R 0755 ".$mod_path);
+			system("/bin/chown -R www-data:www-data ".$mod_path);
+		}
+		break;
 	default:
 		//windows or incompilable operating system !!Do Nothing!!
 	break;

@@ -193,7 +193,7 @@ class module_controller {
         include(ctrl_options::GetOption('sentora_root').'/cnf/db.php');
 
         // Updates
-        $v_update_sql = $zdbh->prepare("UPDATE x_modules SET mo_version_in=30010 WHERE mo_name_vc='".ui_module::GetModuleName()."'");
+        $v_update_sql = $zdbh->prepare("UPDATE x_modules SET mo_version_in=30011 WHERE mo_name_vc='".ui_module::GetModuleName()."'");
         $v_update_sql->execute();
     }
 
@@ -407,10 +407,10 @@ class module_controller {
 									$line .= "<font color=\"green\">Unzip was successful</font><br />";
 									$line .= "Package unzipped to: http://".$site_domain."/".$dir_to_install."<br /><br />";
 									if(file_exists($completedir."/sentastico-install.php")) {
-											$line .= "<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."/sentastico-install.php'> <button class=\"btn btn-primary btn-small\" type=\"button\">Install Now</button> </a>";
+											$line .= "<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."sentastico-install.php'> <button class=\"btn btn-primary btn-small\" type=\"button\">Install Now</button> </a>";
 											$line .= "<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
 										} else {
-											$line .= "<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."/'><button class=\"btn btn-primary btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Install Now</button></a>&nbsp;&nbsp;";
+											$line .= "<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."'><button class=\"btn btn-primary btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Install Now</button></a>&nbsp;&nbsp;";
 											$line .= "<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
 										}
 										
@@ -422,7 +422,7 @@ class module_controller {
 								sleep(5); 
 								// Set file/folder ownership and permissions if on posix
 									if (php_uname('s') != 'Windows NT') {
-										$line .= "Setting file and folder permissions: ".php_uname('s');
+										//$line .= "Setting file and folder permissions: ".php_uname('s');
 										fixPermissions($completedir);
 									}
 							}
@@ -497,7 +497,7 @@ class module_controller {
 	}
 
     static function getCopyright() {
-        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v30.0.1.0 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a>&nbsp;&#8212;&nbsp;Help support future development of this module and donate today!</font>
+        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v30.0.1.1 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a>&nbsp;&#8212;&nbsp;Help support future development of this module and donate today!</font>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="DW8QTHWW4FMBY">

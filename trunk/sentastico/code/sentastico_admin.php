@@ -31,7 +31,7 @@ if (!$_SESSION['zpuid']) {
 // set packages path
 $path = '../../../modules/sentastico/packages/';
 
-if (isset($_POST['pkg_zipname'])) {
+if ((isset($_POST['pkg_zipname'])) && ($_POST['pkg_zipname'] != "")) {
 	$pkg_delete = $_POST['pkg_zipname'];
 
 	$PathFile = $path.$pkg_delete;
@@ -42,11 +42,10 @@ if (isset($_POST['pkg_zipname'])) {
 	$sql = $zdbh->prepare("DELETE FROM `x_sentastico` WHERE pkg_zipname = :pkg_zipname");
 	$sql->execute(array(':pkg_zipname' => $pkg_name));
 
-	echo "<meta http-equiv=\"refresh\" content=\"1\"/>";
 	echo "<p>&nbsp;</p>";
 	echo "<div class=\"alert alert-danger\">Package deleted.</div>";
 	echo "<p>&nbsp;</p>";
-	exit();
+	header( "refresh:3;url=?module=sentastico" ); exit();
 }
 
 // get installed packages
@@ -101,38 +100,43 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 			if (zip_entry_open($zip, $zip_entry)) {
 			  $contents = zip_entry_read($zip_entry);
 			  
-			  preg_match_all("/\<name\>(.*?)\<\/name\>/", $contents, $namearray, PREG_PATTERN_ORDER);
-			  $name = $namearray[0][0];
+			  preg_match_all("/\<name\>(.*?)\<\/name\>/", $contents, $nameArray, PREG_PATTERN_ORDER);
+			  $name = $nameArray[0][0];
 			  $name = preg_replace("/\<name\>/", "", $name);
 			  $name = preg_replace("/\<\/name\>/", "", $name);
 
-			  preg_match_all("/\<version\>(.*?)\<\/version\>/", $contents, $versionarray, PREG_PATTERN_ORDER);
-			  $version = $versionarray[0][0];
+			  preg_match_all("/\<version\>(.*?)\<\/version\>/", $contents, $versionArray, PREG_PATTERN_ORDER);
+			  $version = $versionArray[0][0];
 			  $version = preg_replace("/\<version\>/", "", $version);
 			  $version = preg_replace("/\<\/version\>/", "", $version);
 
-			  preg_match_all("/\<zipname\>(.*?)\<\/zipname\>/", $contents, $zipnamearray, PREG_PATTERN_ORDER);
-			  $zipname = $zipnamearray[0][0];
+			  preg_match_all("/\<zipname\>(.*?)\<\/zipname\>/", $contents, $zipnameArray, PREG_PATTERN_ORDER);
+			  $zipname = $zipnameArray[0][0];
 			  $zipname = preg_replace("/\<zipname\>/", "", $zipname);
 			  $zipname = preg_replace("/\<\/zipname\>/", "", $zipname);
 			  
-			  preg_match_all("/\<type\>(.*?)\<\/type\>/", $contents, $typearray, PREG_PATTERN_ORDER);
-			  $type = $typearray[0][0];
+			  preg_match_all("/\<type\>(.*?)\<\/type\>/", $contents, $typeArray, PREG_PATTERN_ORDER);
+			  $type = $typeArray[0][0];
 			  $type = preg_replace("/\<type\>/", "", $type);
 			  $type = preg_replace("/\<\/type\>/", "", $type);
 			  
-			  preg_match_all("/\<info\>(.*?)\<\/info\>/", $contents, $infoarray, PREG_PATTERN_ORDER);
-			  $info = $infoarray[0][0];
+			  preg_match_all("/\<info\>(.*?)\<\/info\>/", $contents, $infoArray, PREG_PATTERN_ORDER);
+			  $info = $infoArray[0][0];
 			  $info = preg_replace("/\<info\>/", "", $info);
 			  $info = preg_replace("/\<\/info\>/", "", $info);
 			  
-			  preg_match_all("/\<db\>(.*?)\<\/db\>/", $contents, $dbarray, PREG_PATTERN_ORDER);
-			  $db = $dbarray[0][0];
+			  preg_match_all("/\<db\>(.*?)\<\/db\>/", $contents, $dbArray, PREG_PATTERN_ORDER);
+			  $db = $dbArray[0][0];
 			  $db = preg_replace("/\<db\>/", "", $db);
 			  $db = preg_replace("/\<\/db\>/", "", $db);
-						
-			  zip_entry_close($zip_entry);
+
+			  preg_match_all("/\<installer\>(.*?)\<\/installer\>/", $contents, $installerArray, PREG_PATTERN_ORDER);
+			  $installer = $installerArray[0][0];
+			  $installer = preg_replace("/\<installer\>/", "", $installer);
+			  $installer = preg_replace("/\<\/installer\>/", "", $installer);
 			  
+			  zip_entry_close($zip_entry);
+
 			  // put variables into array
 			  $xmlArray = array();
 			  $xmlArray['name'] = $name;
@@ -141,6 +145,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 			  $xmlArray['type'] = $type;
 			  $xmlArray['info'] = $info;
 			  $xmlArray['db'] = $db;
+			  $xmlArray['installer'] = $installer;
 			}
 		  }
 		}
@@ -151,7 +156,6 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 		$packageXml = getPackageXml($path.$newPkgFname);
 
 		if (!isset($packageXml['name'])) {
-			echo "<meta http-equiv=\"refresh\" content=\"5\"/>";
 			echo "<p>&nbsp;</p>";
 			echo "Package: ".$packageXml;
 			echo "<div class=\"alert alert-danger\">Error getting package information. Try again later.<br />If problem persists, contact your server administrator.</div>";
@@ -159,7 +163,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 			// remove package zip file
 			$PathFile = $path.$newPkgFname;
 			unlink($PathFile);
-			exit();
+			header( "refresh:5;url=?module=sentastico" ); exit();
 		} else {
 		$sql = $zdbh->prepare("INSERT INTO `x_sentastico` SET
 							pkg_name = :name,
@@ -167,7 +171,8 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 							pkg_zipname = :zipname,
 							pkg_type = :type,
 							pkg_info = :info,
-							pkg_db = :db
+							pkg_db = :db,
+							pkg_installer = :installer
 						");
 		$sql->execute(array(
 							':name' => $packageXml['name'],
@@ -175,15 +180,15 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 							':zipname' => $packageXml['zipname'],
 							':type' => $packageXml['type'],
 							':info' => $packageXml['info'],
-							':db' => $packageXml['db']
+							':db' => $packageXml['db'],
+							':installer' => $packageXml['installer']
 							));
 		// end xml
 		
-		echo "<meta http-equiv=\"refresh\" content=\"1\"/>";
 		echo "<p>&nbsp;</p>";
 		echo "<div class=\"alert alert-info\">Adding new package...</div>";
 		echo "<p>&nbsp;</p>";
-		exit();
+		header( "refresh:10;url=?module=sentastico" ); exit();
 		}
 	}
 }
@@ -193,10 +198,10 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" id="tablist" role="tablist">
         <li class="active" role="presentation">
-			<a  onClick="window.location.reload()" href="#sen_add" aria-controls="sen_add" role="tab" data-toggle="tab">Add Packages</a>
+			<a onclick="javascript:location.href='?module=sentastico'" href="#sen_add" aria-controls="sen_add" role="tab" data-toggle="tab">Add Packages</a>
         </li>
         <li role="presentation">
-            <a  onClick="window.location.reload()" href="#sen_del" aria-controls="sen_del" role="tab" data-toggle="tab">Remove Packages</a>
+            <a onclick="javascript:location.href='?module=sentastico'" href="#sen_del" aria-controls="sen_del" role="tab" data-toggle="tab">Remove Packages</a>
         </li>
 	</ul>
 	<!-- Tab panes -->
@@ -205,6 +210,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
         <div role="tabpanel" class="tab-pane active" id="sen_add">
 			<h3>Add Packages</h3>
        		<?php
+			$_POST = array();
 			if ($file_headers[0] != 'HTTP/1.1 404 Not Found') {
 
 				// compare the two lists and show those not installed

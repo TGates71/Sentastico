@@ -14,7 +14,7 @@
         </div>
         <div class="zmodule_desc" id="zmodule_desc_<@ ModuleName @>"><@ ModuleDesc @>
             <% if CheckUpdate %>
-                <p><font face="Ariel" color="red" size="3"><b><: New Version Available. :></b></font></p>
+                <p><font face="Ariel" color="red" size="3"><b><: New Version Available. Please Notify Support. :></b></font></p>
             <% endif %>
         </div>
     </div>
@@ -29,21 +29,17 @@
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" id="tablist" role="tablist">
 					<li class="active" role="presentation">
-						<a onClick="window.location.reload()" href="#sen_admin" aria-controls="sen_admin" role="tab" data-toggle="tab"><: Admin :></a>
+						<a  onclick="javascript:location.href='?module=sentastico'" href="#sen_admin" aria-controls="sen_admin" role="tab" data-toggle="tab"><: Admin :></a>
 					</li>
 					<li role="presentation">
-						<a onClick="window.location.reload()" href="#sentastico" aria-controls="sentastico" role="tab" data-toggle="tab"><: Sentastico :></a>
+						<a onclick="javascript:location.href='?module=sentastico'" href="#sentastico" aria-controls="sentastico" role="tab" data-toggle="tab"><: Sentastico :></a>
 					</li>
-					<!--<li>
-						<a href="?module=sentastico"><: Refresh List :></a>
-					</li>-->
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<!-- Admin -->
 					<div role="tabpanel" class="tab-pane active" id="sen_admin">
 						<@ SentasticoAdmin @>
-						<!--<button class="btn btn-success" onclick="location.reload()"><: Reload :></button>-->
 						<p></p>
 					</div>
 					<!-- Package Selection -->

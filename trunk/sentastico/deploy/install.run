@@ -21,16 +21,19 @@ function installModule(){
     global $zdbh;
 
     //create table
-    $numrows = $zdbh->prepare("CREATE TABLE IF NOT EXISTS `x_sentastico` (
-                                      `pkg_id` int(25) NOT NULL AUTO_INCREMENT,
-                                      `pkg_name` varchar(50) NOT NULL,
-                                      `pkg_version` varchar(15) NOT NULL,
-									  `pkg_zipname` varchar(32) NOT NULL,
-									  `pkg_type` varchar(15) NOT NULL,
-                                      `pkg_info` varchar(255) NOT NULL,
-                                      `pkg_db` varchar(3) NOT NULL,
-                                      PRIMARY KEY (`pkg_id`)
-                                    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
+    $numrows = $zdbh->prepare("
+		CREATE TABLE IF NOT EXISTS `x_sentastico` (
+		  `pkg_id` int(25) NOT NULL AUTO_INCREMENT,
+		  `pkg_name` varchar(50) NOT NULL,
+		  `pkg_version` varchar(15) NOT NULL,
+		  `pkg_zipname` varchar(32) NOT NULL,
+		  `pkg_type` varchar(15) NOT NULL,
+		  `pkg_info` varchar(255) NOT NULL,
+		  `pkg_db` varchar(3) NOT NULL,
+		  `pkg_installer` varchar(255) NOT NULL,
+		  PRIMARY KEY (`pkg_id`)
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
+	);
      $numrows->execute();
 }
 
@@ -52,7 +55,7 @@ function fixPermissions(){
 		}
 		break;
 	default:
-		//windows or incompilable operating system !!Do Nothing!!
+		//windows or unknown operating system -Do Nothing-
 	break;
 	} 
 }

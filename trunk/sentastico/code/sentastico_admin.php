@@ -188,7 +188,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 		echo "<p>&nbsp;</p>";
 		echo "<div class=\"alert alert-info\">Adding new package...</div>";
 		echo "<p>&nbsp;</p>";
-		header( "refresh:10;url=?module=sentastico" ); exit();
+		header( "refresh:5;url=?module=sentastico" ); exit();
 		}
 	}
 }

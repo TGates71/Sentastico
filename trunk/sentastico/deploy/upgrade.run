@@ -22,13 +22,5 @@ function UpgradeModule($newversion, $module){
     $sql->execute();     
 }
 // First variable is the new version. Second variable is the module name.
-UpgradeModule('30112', 'sentastico');
-
-// DB update - add new 'pkg_installer' column
-function UpgradeDB(){
-    global $zdbh;
-    $sql = $zdbh->prepare("ALTER TABLE x_sentastico ADD pkg_installer varchar(255) NOT NULL AFTER pkg_db");
-    $sql->execute();     
-}
-UpgradeDB();
+UpgradeModule('30122', 'sentastico');
 ?> 

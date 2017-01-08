@@ -4,11 +4,11 @@
 // Contact Email    : tgates@mach-hosting.com
 // Original Author  : Bobby Allen
 
+v30.1.2.2 - 01-05-2017
+Remove deprecated sentora_install.php coding
+
 v30.1.1.2 - 12-21-2016
 Added new code and DB entry for installer path (Remove deprecated sentora_install.php in next version)
-Removed deprecated code
-Changed how admin links work
-Cleaned up and organized some sections of code
 
 v30.0.1.2 - 08-17-2016
 Removed reload and refresh links.

@@ -21,7 +21,7 @@ function installModule(){
     global $zdbh;
 
     //create table
-    $numrows = $zdbh->prepare("
+    $stmt = $zdbh->prepare("
 		CREATE TABLE IF NOT EXISTS `x_sentastico` (
 		  `pkg_id` int(25) NOT NULL AUTO_INCREMENT,
 		  `pkg_name` varchar(50) NOT NULL,
@@ -34,7 +34,7 @@ function installModule(){
 		  PRIMARY KEY (`pkg_id`)
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
 	);
-     $numrows->execute();
+     $stmt->execute();
 }
 
 installModule();

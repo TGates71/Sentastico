@@ -31,6 +31,7 @@ if (!$_SESSION['zpuid']) {
 // set packages path
 $path = '../../../modules/sentastico/packages/';
 
+// remove a package
 if ((isset($_POST['pkg_zipname'])) && ($_POST['pkg_zipname'] != "")) {
 	$pkg_delete = $_POST['pkg_zipname'];
 
@@ -45,27 +46,9 @@ if ((isset($_POST['pkg_zipname'])) && ($_POST['pkg_zipname'] != "")) {
 	echo "<p>&nbsp;</p>";
 	echo "<div class=\"alert alert-danger\">Package deleted.</div>";
 	echo "<p>&nbsp;</p>";
-	header( "refresh:3;url=?module=sentastico" ); exit();
+	header("refresh:3;url=?module=sentastico");
+	exit();
 }
-
-// get installed packages
-// convert to use local DB
-$ignore = Array(".", "..", ".htaccess", "thumbs.db", "index.html", "packages.xml");
-$packagesL = array_diff(scandir($path), $ignore);
-$packagesL = array_map('trim', $packagesL);
-$packagesL = array_values($packagesL);
-
-$sql = $zdbh->prepare("SELECT * FROM x_sentastico");
-$sql->execute();
-$packagesDB = $sql->fetchAll();
-
-// get available packages from server
-// convert to use remote XML file
-$file = "http://sen-packs.mach-hosting.com/packages/packages.txt";
-$file_headers = @get_headers($file);
-$packageList = file($file);
-$packageList = array_map('trim', $packageList);
-$packageList = array_values($packageList);
 
 // install a package
 if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POST['pkg']))) {
@@ -80,7 +63,8 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 	// download the package if not already on the server
 	if (!is_file($path.$newPkgFname)) {
 		$parse = curl_init();
-		$source = "http://sen-packs.mach-hosting.com/packages/".$newPkgFname;
+		$repoURL = "http://sen-packs.mach-hosting.com/packages/";
+		$source = $repoURL.$newPkgFname;
 		curl_setopt($parse, CURLOPT_URL, $source);
 		curl_setopt($parse, CURLOPT_RETURNTRANSFER, 1);
 		$data = curl_exec($parse);
@@ -163,7 +147,8 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 			// remove package zip file
 			$PathFile = $path.$newPkgFname;
 			unlink($PathFile);
-			header( "refresh:5;url=?module=sentastico" ); exit();
+			header("refresh:5;url=?module=sentastico");
+			exit();
 		} else {
 		$sql = $zdbh->prepare("INSERT INTO `x_sentastico` SET
 							pkg_name = :name,
@@ -186,11 +171,43 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 		// end xml
 		
 		echo "<p>&nbsp;</p>";
-		echo "<div class=\"alert alert-info\">Adding new package...</div>";
+		echo "<div class=\"alert alert-info\">Package Added.</div>";
 		echo "<p>&nbsp;</p>";
-		header( "refresh:5;url=?module=sentastico" ); exit();
+		header("refresh:3;url=?module=sentastico");
+		exit();
 		}
 	}
+}
+
+// get installed packages
+// convert to use local DB
+$ignore = Array(".", "..", ".htaccess", "thumbs.db", "index.html", "packages.xml");
+$packagesL = array_diff(scandir($path), $ignore);
+$packagesL = array_map('trim', $packagesL);
+$packagesL = array_values($packagesL);
+
+$sql = $zdbh->prepare("SELECT * FROM x_sentastico");
+$sql->execute();
+$packagesDB = $sql->fetchAll();
+
+// get available packages from sen-packs repo
+// convert to use remote XML file
+$file = "http://sen-packs.mach-hosting.com/packages/packages.txt";
+$file_headers = @get_headers($file);
+$packageList = file($file);
+$packageList = array_map('trim', $packageList);
+$packageList = array_values($packageList);
+
+// Sentastico Package Dev
+if (file_exists("sen-dev.php")) {
+	// get available packages from sen-packs dev repo
+	// convert to use remote XML file
+	$file2 = "http://sen-packs.mach-hosting.com/packages/packages_dev.txt";
+	$file_headers2 = @get_headers($file2);
+	$packageList2 = file($file2);
+	$packageList2 = array_map('trim', $packageList2);
+	$packageList2 = array_values($packageList2);
+	$packageList = array_merge($packageList, $packageList2);
 }
 ?>
 <!-- Menu Start -->

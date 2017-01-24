@@ -16,11 +16,13 @@ require_once('dryden/ctrl/users.class.php');
 require_once('dryden/fs/director.class.php');
 require_once('inc/dbc.inc.php');
 
-function UpgradeModule($newversion, $module){
+function removeModule(){
     global $zdbh;
-    $sql = $zdbh->prepare("UPDATE x_modules SET mo_version_in = $newversion WHERE mo_folder_vc = '$module'");
-    $sql->execute();     
+        
+    //delete table
+    $stmt = $zdbh->prepare("DROP TABLE `x_sentastico");
+    $stmt->execute();
 }
-// First variable is the new version. Second variable is the module name.
-UpgradeModule('30122', 'sentastico');
-?> 
+
+removeModule();
+?>

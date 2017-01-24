@@ -44,7 +44,7 @@ function FetchDomainDir($uid,$domain){
     }
 }
 
-// Set file and folder permissions and ownership
+// Get folder information
 function directoryToArray($directory, $recursive) {
     $array_items = array();
     if ($handle = opendir($directory)) {
@@ -250,6 +250,7 @@ class module_controller {
 //		$admin = "Do Admin Stuff!";
 //		return $admin;
 //	}
+
 // end admin conversion
 
 	// Package installer
@@ -398,11 +399,6 @@ class module_controller {
 								if((isset($pkginstaller)) && ($pkginstaller != "") && ($pkginstaller != NULL)) {
 										$line .= "<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install.$pkginstaller."/'> <button class=\"btn btn-primary btn-small\" type=\"button\">Install Now</button> </a>";
 										$line .= "<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
-									// remove after all packages are updated
-									} elseif(file_exists($completedir."/sentastico-install.php")) {
-										$line .= "<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."sentastico-install.php'> <button class=\"btn btn-primary btn-small\" type=\"button\">Install Now</button> </a>";
-										$line .= "<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
-									// end remove
 									} else {
 										$line .= "<a target=\"_blank\" href='http://".$site_domain."/".$dir_to_install."'><button class=\"btn btn-primary btn-small\" type=\"button\" onClick=\"javascript:location.href='?module=sentastico'\">Install Now</button></a>  ";
 										$line .= "<button class=\"btn btn-danger btn-small\" onClick=\"javascript:location.href='?module=sentastico'\">Install Later</button>";
@@ -489,7 +485,7 @@ class module_controller {
 	}
 
     static function getCopyright() {
-        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v30.1.1.2 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a> &#8212; Help support future development of this module and donate today!</font>
+        $copyright = '<font face="ariel" size="2">'.ui_module::GetModuleName().' v30.1.2.3 &copy; 2013-'.date("Y").' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a> &#8212; Help support future development of this module and donate today!</font>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="DW8QTHWW4FMBY">

@@ -4,6 +4,9 @@
 // Contact Email    : tgates@mach-hosting.com
 // Original Author  : Bobby Allen
 
+v30.1.2.4 - 01-18-2017
+Fixed typo
+
 v30.1.2.3 - 01-18-2017
 Changed some notifications
 Fixed DB statements

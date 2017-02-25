@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module>
     <name>Sentastico</name>
-    <version>30124</version>
+    <version>30125</version>
     <defaultcat>Advanced</defaultcat>
     <type>user</type>
 	<ostype>all</ostype>

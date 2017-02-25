@@ -22,10 +22,9 @@ function UpgradeModule($newversion, $module){
     $stmt->execute();     
 }
 // First variable is the new version. Second variable is the module name.
-UpgradeModule('30124', 'sentastico');
-
-$DelFilePath = 'modules/'.$controller->GetControllerRequest('URL', 'module').'/code/sen-dev.php';
+UpgradeModule('30125', 'sentastico');
  
 # delete file if exists
-if (file_exists($DelFilePath)) { unlink ($DelFilePath); }
+$DelFile = 'modules/sentastico/code/sen-dev.php';
+if (@file_exists($DelFile)) { @unlink($DelFile); }
 ?> 

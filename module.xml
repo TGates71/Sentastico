@@ -9,5 +9,5 @@
 	<authorname>T.Gates, B.Allen</authorname>
     <authoremail>tgates@sentora.org</authoremail>
     <authorurl>http://www.sentora.org</authorurl>
-    <updateurl>http://zppy-repo.mach-hosting.com/repo-dev/sentastico.xml</updateurl>
+    <updateurl>https://zppy-repo.mach-hosting.com/repo-dev/sentastico.xml</updateurl>
 </module>

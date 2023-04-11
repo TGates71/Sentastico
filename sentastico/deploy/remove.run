@@ -1,9 +1,9 @@
 <?php
-// Sentastico Open Source Script Installer for Sentora CP
-// Updated By       : TGates for Sentora
-// Additional Work  : Durandle, Mudasir Mirza
-// Contact Email    : tgates@sentora.org
-// Original Author  : Bobby Allen
+# Sentastico Open Source Script Installer for Sentora CP
+# Updated By       : TGates for Sentora
+# Additional Work  : Durandle, Mudasir Mirza
+# Contact Email    : tgates@sentora.org
+# Original Author  : Bobby Allen
 
 require_once('cnf/db.php');
 require_once('dryden/db/driver.class.php');
@@ -19,7 +19,7 @@ require_once('inc/dbc.inc.php');
 function removeModule(){
     global $zdbh;
         
-    //delete table
+    #delete table
     $stmt = $zdbh->prepare("DROP TABLE `x_sentastico`");
     $stmt->execute();
 }

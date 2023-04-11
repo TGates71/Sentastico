@@ -1,9 +1,9 @@
 <?php
-/*
-// Sentastico Admin - Admin tool for Sentastico.
-// Contact          : http://forums.sentora.org/
-// Author           : TGates
-*/
+#
+# Sentastico Admin - Admin tool for Sentastico.
+# Contact          : http://forums.sentora.org/
+# Author           : TGates
+#
 
 require_once('../../../cnf/db.php');
 require_once('../../../dryden/db/driver.class.php');
@@ -12,13 +12,13 @@ require_once('../../../dryden/ctrl/auth.class.php');
 require_once('../../../dryden/ctrl/users.class.php');
 require_once('../../../inc/dbc.inc.php');
 
-// auth
+# auth
 session_start();
 if (!$_SESSION['zpuid']) {
 	die ("Access Denied");
 }
 
-// use Sentora_Default css and js
+# use Sentora_Default css and js
 ?>
 <!-- Stylesheets -->
 <link href="../../../modules/sentastico/assets/bootstrap.min.css" rel="stylesheet">
@@ -28,18 +28,20 @@ if (!$_SESSION['zpuid']) {
 <script src="../../../modules/sentastico/assets/bootstrap-tab.js"></script>
 <script src="../../../modules/sentastico/assets/sorttable.js"></script>
 <?php
-// set packages path
+# set packages path
 $path = '../../../modules/sentastico/packages/';
+# set repo URL (With trailing slash!)
+$repoURL = "https://sen-packs.mach-hosting.com/packages/";
 
-// remove a package
+# remove a package
 if ((isset($_POST['pkg_zipname'])) && ($_POST['pkg_zipname'] != "")) {
 	$pkg_delete = $_POST['pkg_zipname'];
 
 	$PathFile = $path.$pkg_delete;
-	// remove package zip file
+	# remove package zip file
 	unlink($PathFile);
-	$pkg_name = preg_replace("/.zip/", "", $pkg_delete);
-	// remove package DB entry
+	$pkg_name = preg_replace("/.zsp/", "", $pkg_delete);
+	# remove package DB entry
 	$sql = $zdbh->prepare("DELETE FROM `x_sentastico` WHERE pkg_zipname = :pkg_zipname");
 	$sql->execute(array(':pkg_zipname' => $pkg_name));
 
@@ -50,20 +52,19 @@ if ((isset($_POST['pkg_zipname'])) && ($_POST['pkg_zipname'] != "")) {
 	exit();
 }
 
-// install a package
+# install a package
 if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POST['pkg']))) {
 	
-	// cleaning and setting of some vars
+	# cleaning and setting of some vars
 	$newPackage = $_POST['pkg'];
-	$newPkgFname = $newPackage.".zip";
+	$newPkgFname = $newPackage.".zsp";
 	$newPkgFname = preg_replace('/\s+/', '', $newPkgFname);
 	$extractPath = $path.$newPackage;
 	$extractPath = preg_replace('/\s+/', '', $extractPath);
 
-	// download the package if not already on the server
+	# download the package if not already on the server
 	if (!is_file($path.$newPkgFname)) {
 		$parse = curl_init();
-		$repoURL = "http://sen-packs.mach-hosting.com/packages/";
 		$source = $repoURL.$newPkgFname;
 		curl_setopt($parse, CURLOPT_URL, $source);
 		curl_setopt($parse, CURLOPT_RETURNTRANSFER, 1);
@@ -75,7 +76,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 		fputs($file, $data);
 		fclose($file);
 
-	// parse the sentastico.xml and add it to the DB
+	# parse the sentastico.xml and add it to the DB
 	function getPackageXml($file) {
 	  $zip = zip_open($file);
 	  if ($zip) {
@@ -121,7 +122,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 			  
 			  zip_entry_close($zip_entry);
 
-			  // put variables into array
+			  # put variables into array
 			  $xmlArray = array();
 			  $xmlArray['name'] = $name;
 			  $xmlArray['version'] = $version;
@@ -135,7 +136,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 		}
 	  } 
 		return $xmlArray;
-} // end function
+} # end function
 
 		$packageXml = getPackageXml($path.$newPkgFname);
 
@@ -144,7 +145,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 			echo "Package: ".$packageXml;
 			echo "<div class=\"alert alert-danger\">Error getting package information. Try again later.<br />If problem persists, contact your server administrator.</div>";
 			echo "<p>&nbsp;</p>";
-			// remove package zip file
+			# remove package zip file
 			$PathFile = $path.$newPkgFname;
 			unlink($PathFile);
 			header("refresh:5;url=?module=sentastico");
@@ -168,7 +169,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 							':db' => $packageXml['db'],
 							':installer' => $packageXml['installer']
 							));
-		// end xml
+		# end xml
 		
 		echo "<p>&nbsp;</p>";
 		echo "<div class=\"alert alert-info\">Package Added.</div>";
@@ -179,35 +180,44 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 	}
 }
 
-// get installed packages
-// convert to use local DB
+# get installed packages
+# convert to use local DB
 $ignore = Array(".", "..", ".htaccess", "thumbs.db", "index.html", "packages.xml");
 $packagesL = array_diff(scandir($path), $ignore);
 $packagesL = array_map('trim', $packagesL);
 $packagesL = array_values($packagesL);
 
+# get from DB
 $sql = $zdbh->prepare("SELECT * FROM x_sentastico");
 $sql->execute();
 $packagesDB = $sql->fetchAll();
 
-// get available packages from sen-packs repo
-// convert to use remote XML file
-$file = "http://sen-packs.mach-hosting.com/packages/packages.txt";
-$file_headers = @get_headers($file);
-$packageList = file($file);
-$packageList = array_map('trim', $packageList);
-$packageList = array_values($packageList);
+# get available packages from sen-packs repo
+# convert to use remote XML file, json or DB
+$file = $repoURL . "packages.txt";
+function url_exists($file){
+   $headers = get_headers($file);
+   return stripos($headers[0],"200 OK")?true:false;
+}
+if (url_exists($file)) {
+	$packageList = file($file);
+	$packageList = array_map('trim', $packageList);
+	$packageList = array_values($packageList);
+} else {
+   echo "Can not connect to remote server. Try again later.";
+}
 
-// Sentastico Package Dev
+# get available packages from sen-packs dev repo
+# convert to use remote XML file, json or DB
 if (file_exists("sen-dev.php")) {
-	// get available packages from sen-packs dev repo
-	// convert to use remote XML file
-	$file2 = "http://sen-packs.mach-hosting.com/packages/packages_dev.txt";
-	$file_headers2 = @get_headers($file2);
-	$packageList2 = file($file2);
-	$packageList2 = array_map('trim', $packageList2);
-	$packageList2 = array_values($packageList2);
-	$packageList = array_merge($packageList, $packageList2);
+	$file2 = $repoURL . "packages_dev.txt";
+	if (url_exists($file2)) {
+		$file_headers2 = get_headers($file2);
+		$packageList2 = file($file2);
+		$packageList2 = array_map('trim', $packageList2);
+		$packageList2 = array_values($packageList2);
+		$packageList = array_merge($packageList, $packageList2);
+	}
 }
 ?>
 <!-- Menu Start -->
@@ -215,10 +225,10 @@ if (file_exists("sen-dev.php")) {
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" id="tablist" role="tablist">
         <li class="active" role="presentation">
-			<a onclick="javascript:location.href='?module=sentastico'" href="#sen_add" aria-controls="sen_add" role="tab" data-toggle="tab">Add Packages</a>
+			<a href="#sen_add" aria-controls="sen_add" role="tab" data-toggle="tab">Add Packages</a>
         </li>
         <li role="presentation">
-            <a onclick="javascript:location.href='?module=sentastico'" href="#sen_del" aria-controls="sen_del" role="tab" data-toggle="tab">Remove Packages</a>
+            <a href="#sen_del" aria-controls="sen_del" role="tab" data-toggle="tab">Remove Packages</a>
         </li>
 	</ul>
 	<!-- Tab panes -->
@@ -230,9 +240,9 @@ if (file_exists("sen-dev.php")) {
 			$_POST = array();
 			if ($file_headers[0] != 'HTTP/1.1 404 Not Found') {
 
-				// compare the two lists and show those not installed
-				$packagesLx = preg_replace('/.zip/', '', $packagesL);
-				$package_diff = array_diff($packageList, $packagesLx);
+				# compare the two lists and show those not installed
+				$packagesLx = preg_replace('/.zsp/', '', $packagesL);
+				$package_diff = @array_diff($packageList, $packagesLx);
 				if (!$package_diff) {
 					echo '<p>&nbsp;</p><table><tr><th>No new or updated packages to install.</th></tr></table>';
 				} else {
@@ -296,7 +306,7 @@ if (file_exists("sen-dev.php")) {
 			foreach($packagesL as $packageL){
 				if(!in_array($packageL, $ignore)) {
 					list($packageLname, $packageLVers) = explode("_", $packageL);
-					$packageLVers = preg_replace('/.zip/', '', $packageLVers);
+					$packageLVers = preg_replace('/.zsp/', '', $packageLVers);
 				?>
 				<tr>
 				<form name="pkg_delete" method="post">
@@ -314,17 +324,4 @@ if (file_exists("sen-dev.php")) {
         </div>
 	</div>
 </div>
-<script>
-	$(function() { 
-		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-			// save the latest tab; use cookies if you like 'em better:
-			localStorage.setItem('lastTab', $(this).attr('href'));
-		});
-	
-		// go to the latest tab, if it exists:
-		var lastTab = localStorage.getItem('lastTab');
-		if (lastTab) {
-			$('[href="' + lastTab + '"]').tab('show');
-		}
-	});
-</script>
+

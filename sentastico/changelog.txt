@@ -1,8 +1,15 @@
-// Sentastico Open Source Script Installer for Sentora CP
-// Updated By       : TGates for Sentora
-// Additional Work  : Durandle, Mudasir Mirza
-// Contact Email    : tgates@mach-hosting.com
-// Original Author  : Bobby Allen
+# Sentastico Open Source Script Installer for Sentora CP
+# Updated By       : TGates for Sentora
+# Additional Work  : Durandle, Mudasir Mirza
+# Contact Email    : tgates@mach-hosting.com
+# Original Author  : Bobby Allen
+
+v2.0.0 formally v30.2.0.0 - 02-12-2023
+Re-versioned to 2.0.0 to depricate all previous versions and match new Sentora version
+Revised for Sentora v2.x.x and php7
+Changed repo to https
+Changed file extension to .zsp
+Updated author donation link
 
 v30.1.2.5 - 02-24-2017
 Fixed upgrade.run file.

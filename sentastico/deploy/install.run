@@ -1,9 +1,9 @@
 <?php
-// Sentastico Open Source Script Installer for Sentora CP
-// Updated By       : TGates for Sentora
-// Additional Work  : Durandle, Mudasir Mirza
-// Contact Email    : tgates@sentora.org
-// Original Author  : Bobby Allen
+# Sentastico Open Source Script Installer for Sentora CP
+# Updated By       : TGates for Sentora
+# Additional Work  : Durandle, Mudasir Mirza
+# Contact Email    : tgates@sentora.org
+# Original Author  : Bobby Allen
 
 require_once('cnf/db.php');
 require_once('dryden/db/driver.class.php');
@@ -16,11 +16,11 @@ require_once('dryden/ctrl/users.class.php');
 require_once('dryden/fs/director.class.php');
 require_once('inc/dbc.inc.php');
 
-// Install DB table
+# Install DB table
 function installModule(){
     global $zdbh;
 
-    //create table
+    # Create table
     $stmt = $zdbh->prepare("
 		CREATE TABLE IF NOT EXISTS `x_sentastico` (
 		  `pkg_id` int(25) NOT NULL AUTO_INCREMENT,
@@ -39,7 +39,7 @@ function installModule(){
 
 installModule();
 
-// Fix folder permissions if not set properly
+# Fix folder permissions if not set properly
 function fixPermissions(){
 	$sysOS = PHP_OS;
 	$checkredhat = '/etc/redhat-release';
@@ -55,7 +55,7 @@ function fixPermissions(){
 		}
 		break;
 	default:
-		//windows or unknown operating system -Do Nothing-
+		# windows or unknown operating system -Do Nothing-
 	break;
 	} 
 }

@@ -13,9 +13,6 @@
             <@ ModuleName @>
         </div>
         <div class="zmodule_desc" id="zmodule_desc_<@ ModuleName @>"><@ ModuleDesc @>
-            <% if CheckUpdate %>
-                <p><font face="Ariel" color="red" size="3"><b><: New Version Available. Please Notify Support. :></b></font></p>
-            <% endif %>
         </div>
     </div>
      <% if InstallerForm %>
@@ -56,7 +53,7 @@
 		<% endif %>
     <% endif %>
 	<div>
-		<@ Copyright @>
+		<@ Copyright @><@ Donation @>
 	</div>
 </div>
 <script>

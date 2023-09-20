@@ -200,6 +200,7 @@ function url_exists($file){
    return stripos($headers[0],"200 OK")?true:false;
 }
 if (url_exists($file)) {
+	$file_headers = get_headers($file);
 	$packageList = file($file);
 	$packageList = array_map('trim', $packageList);
 	$packageList = array_values($packageList);
@@ -324,4 +325,3 @@ if (file_exists("sen-dev.php")) {
         </div>
 	</div>
 </div>
-

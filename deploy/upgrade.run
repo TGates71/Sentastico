@@ -22,7 +22,7 @@ function UpgradeModule($newversion, $module){
     $stmt->execute();     
 }
 # First variable is the new version. Second variable is the module name.
-UpgradeModule('200', 'sentastico');
+UpgradeModule('201', 'sentastico');
  
 # delete file if exists
 $DelFile = 'modules/sentastico/code/sen-dev.php';

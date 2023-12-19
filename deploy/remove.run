@@ -20,7 +20,7 @@ function removeModule(){
     global $zdbh;
         
     #delete table
-    $stmt = $zdbh->prepare("DROP TABLE `x_sentastico`");
+    $stmt = $zdbh->prepare("DROP TABLE IF EXISTS `x_sentastico`");
     $stmt->execute();
 }
 

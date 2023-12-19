@@ -52,9 +52,9 @@
         </div>
 		<% endif %>
     <% endif %>
-	<div>
-		<@ Copyright @><@ Donation @>
-	</div>
+</div>
+<div>
+	<@ Copyright @><@ Donation @>
 </div>
 <script>
 	$(function() { 

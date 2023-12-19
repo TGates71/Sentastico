@@ -28,7 +28,7 @@ function installModule(){
 		  `pkg_version` varchar(15) NOT NULL,
 		  `pkg_zipname` varchar(32) NOT NULL,
 		  `pkg_type` varchar(15) NOT NULL,
-		  `pkg_info` varchar(255) NOT NULL,
+		  `pkg_info` text NOT NULL,
 		  `pkg_db` varchar(3) NOT NULL,
 		  `pkg_installer` varchar(255) NOT NULL,
 		  PRIMARY KEY (`pkg_id`)

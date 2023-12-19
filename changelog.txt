@@ -7,6 +7,9 @@
 Plans to-do:
 -Auto create DB and DB User (If needed)
 
+v2.0.2 - 09-19-2023
+-Fixed bug in x_sentastico.pkg_info being too small ('varchar(255)' changed to 'text')
+
 v2.0.1 - 09-19-2023
 -Fixed bug in sentastico_admin.php
 

@@ -455,7 +455,7 @@ class module_controller {
     }
 	
     static function getCopyright() {
-        $copyright = '<font face="ariel" size="2">' . ui_module::GetModuleName() . ' v2.0.1 &copy; 2013-' . date("Y") . ' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a> &#8212; Help support future development of this module and donate today!</font>';
+        $copyright = '<font face="ariel" size="2">' . ui_module::GetModuleName() . ' v2.0.2 &copy; 2013-' . date("Y") . ' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a> &#8212; Help support future development of this module and donate today!</font>';
         return $copyright;
     }
 }

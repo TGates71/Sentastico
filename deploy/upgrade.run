@@ -26,7 +26,7 @@ function UpgradeModule($newversion, $module){
 	$update->execute();
 }
 # First variable is the new version. Second variable is the module name.
-UpgradeModule('202', 'sentastico');
+UpgradeModule('203', 'sentastico');
  
 # delete file if exists
 $DelFile = 'modules/sentastico/code/sen-dev.php';

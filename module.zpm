@@ -20,35 +20,35 @@
             <@ RunInstallerForm @>
         </div>
      <% else %>
-			<% if IsAdmin %>
+		<% if IsAdmin %>
 			<!-- Menu Start -->
-			<div class="tab-menu" role="tabpanel">
+			<div class="tab-menu">
 				<!-- Nav tabs -->
-				<ul class="nav nav-tabs" id="tablist" role="tablist">
-					<li class="active" role="presentation">
-						<a  onclick="javascript:location.href='?module=sentastico'" href="#sen_admin" aria-controls="sen_admin" role="tab" data-toggle="tab"><: Admin :></a>
-					</li>
-					<li role="presentation">
+				<ul class="nav nav-tabs">
+					<li class="active">
 						<a onclick="javascript:location.href='?module=sentastico'" href="#sentastico" aria-controls="sentastico" role="tab" data-toggle="tab"><: Sentastico :></a>
+					</li>
+					<li>
+						<a  onclick="javascript:location.href='?module=sentastico'" href="#sen_admin" aria-controls="sen_admin" role="tab" data-toggle="tab"><: Admin :></a>
 					</li>
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<!-- Admin -->
-					<div role="tabpanel" class="tab-pane active" id="sen_admin">
+					<div role="tabpanel" class="tab-pane" id="sen_admin">
 						<@ SentasticoAdmin @>
-						<p></p>
 					</div>
 					<!-- Package Selection -->
-					<div role="tabpanel" class="tab-pane" id="sentastico">
+					<div role="tabpanel" class="tab-pane active" id="sentastico">
+						<h3><: Choose a package to install :>:</h3>
 						<@ PackageSelection @>
 					</div>
 				</div>
 			</div>
 		<% else %>
         <div class="zform_wrapper">
-            <h2><: Sentastico Packages :>:</h2>
-                <@ PackageSelection @>
+            <h3><: Choose a package to install :>:</h3>
+			<@ PackageSelection @>
         </div>
 		<% endif %>
     <% endif %>
@@ -57,15 +57,16 @@
 	<@ Copyright @><@ Donation @>
 </div>
 <script>
-	$(function() { 
-		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-			// save the latest tab; use cookies if you like 'em better:
+	$(function()
+	{ 
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e)
+		{
+			// save the latest tab;
 			localStorage.setItem('lastTab', $(this).attr('href'));
 		});
-	
-		// go to the latest tab, if it exists:
 		var lastTab = localStorage.getItem('lastTab');
-		if (lastTab) {
+		if (lastTab)
+		{
 			$('[href="' + lastTab + '"]').tab('show');
 		}
 	});

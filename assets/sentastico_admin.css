@@ -139,7 +139,7 @@ form br {
 /* Spinner */
 #loading {
 	background-color: #666;
-	opacity: 20%;
+	opacity: 1;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -155,7 +155,7 @@ form br {
 }
 #ggloading {
 	background-color: #666;
-	opacity: 50%;
+	opacity: 1;
 	position: fixed;
 	top: 50%;
 	left: 50%;

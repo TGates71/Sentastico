@@ -6,6 +6,12 @@
 
 Plans to-do:
 -Auto create DB and DB User (If needed)
+-Move sentastico_admin.php code into controller.ext.php
+
+2.0.3 2024-01-06v
+-Many front-end display fixes
+-Cleaned up old code and updated code layout and form
+-Fixed the loader appearance
 
 v2.0.2 - 09-19-2023
 -Fixed bug in x_sentastico.pkg_info being too small ('varchar(255)' changed to 'text')

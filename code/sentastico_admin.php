@@ -143,7 +143,7 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 		if (!isset($packageXml['name'])) {
 			echo "<p>&nbsp;</p>";
 			echo "Package: ".$packageXml;
-			echo "<div class=\"alert alert-danger\">Error getting package information. Try again later.<br />If problem persists, contact your server administrator.</div>";
+			echo "<div class=\"alert alert-danger\">Error getting package information. Try again later.<br>If problem persists, contact your server administrator.</div>";
 			echo "<p>&nbsp;</p>";
 			# remove package zip file
 			$PathFile = $path.$newPkgFname;
@@ -236,7 +236,7 @@ if (file_exists("sen-dev.php")) {
 	<div class="tab-content">
 		<!-- Add packages -->
         <div role="tabpanel" class="tab-pane active" id="sen_add">
-			<h3>Add Packages</h3>
+			<h4>Add Package</h4>
        		<?php
 			$_POST = array();
 			if ($file_headers[0] != 'HTTP/1.1 404 Not Found') {
@@ -245,7 +245,7 @@ if (file_exists("sen-dev.php")) {
 				$packagesLx = preg_replace('/.zsp/', '', $packagesL);
 				$package_diff = @array_diff($packageList, $packagesLx);
 				if (!$package_diff) {
-					echo '<p>&nbsp;</p><table><tr><th>No new or updated packages to install.</th></tr></table>';
+					echo '<div class="alert alert-success"><h4>No new or updated packages to install.</h4><p>Contact <u><a target="_blank" href="https://forums.sentora.org/member.php?action=profile&uid=2">TGates</a></u> on the <u><a target="_blank" href="https://forums.sentora.org/">Sentora forums</a></u> if you would like a package added or to become a package maintainer.</p><p>View the Sen-Packs site: <u><a target="_blank" href="https://sen-packs.mach-hosting.com/">Sentastico Packages</a></u></p></div>';
 				} else {
 			?>
 				<table class='table table-striped sortable'>
@@ -283,7 +283,7 @@ if (file_exists("sen-dev.php")) {
             	echo "
 				<p>&nbsp;</p>
 				<div class=\"alert alert-danger\">
-				<strong>Error:</strong> There was an error contacting the update server.<br />Please try again later.</a>
+				<strong>Error:</strong> There was an error contacting the update server.<br>Please try again later.</a>
 				</div>
 				<p>&nbsp;</p>";
 			}
@@ -291,7 +291,7 @@ if (file_exists("sen-dev.php")) {
         </div>
 		<!-- Remove Packages -->
         <div role="tabpanel" class="tab-pane" id="sen_del">
-			<h3>Remove Packages</h3>
+			<h4>Remove Package</h4>
 			<?php
 			if (!$packagesL) {
 				echo '<p>&nbsp;</p><table><tr><th>No packages installed.</th></tr></table>';

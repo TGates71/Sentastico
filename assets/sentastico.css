@@ -1,27 +1,31 @@
 /*
-// Sentastico Open Source Script Installer for Sentora CP
-// File				: sentastico.css
-// Version          : 2.0.0 2023-02-12
-// Updated By       : TGates for Sentora
-// Additional Work  : Durandle, Mudasir Mirza
-// Original Author  : Bobby Allen
-// Contact          : http://forums.sentora.org/
+# Sentastico Open Source Script Installer for Sentora CP
+# File				: sentastico.css
+# Version    	    : 2.1.0 2024-01-19
+# Author			: TGates
+# Additional Work	: Durandle, Mudasir Mirza
+# Contact Email		: tgates@mach-hosting.com
+# Based off Author	: Bobby Allen (Original builder of Zantastico for ZPanel)
 */
 /* Sortable tables */
-table.sortable th {
+table.sortable th
+{
 	background-color: #CCC;
 	font-weight: bold;
 	cursor: pointer;
 }
 /* Installer */
-.button-align {
+.button-align
+{
 	text-align: right;
 }
-form {
+form
+{
 	margin: 0;
 	padding: 0;
 }
-form fieldset {
+form fieldset
+{
 	clear: both;
 	border-color: #000;
 	border-width: 1px;
@@ -29,47 +33,58 @@ form fieldset {
 	padding: 10px;
 	margin: 0;
 }
-form fieldset legend {
+form fieldset legend
+{
 	font-size: 1.1em;
 }
-form label {
+form label
+{
 	width: 180px;
 	float: right;
 	padding-bottom: 5px;
 	margin-bottom: 5px;
 	text-align: right;
 }
-form fieldset label:first-letter {
+form fieldset label:first-letter
+{
 	text-decoration: underline;
 }
-form input, form textarea {
+form input, form textarea
+{
 	width: 150px;
 	margin: 0px 0 0 0px;
 }
-form select, form option {
+form select, form option
+{
 	width: 150px;
 	margin: 0px 0 0 0px;
 }
-form input#reset {
+form input#reset
+{
 	margin-left: 0px;
 }
-textarea {
+textarea
+{
 	overflow: auto;
 }
-form small {
+form small
+{
 	display: block;
 	margin: 0 0 5px 160px;
 	padding: 1px 3px;
 	font-size: 88%;
 }
-form .required {
+form .required
+{
 	font-weight: bold;
 }
-form br {
+form br
+{
 	clear: left;
 }
 /* tool tip */
-.tooltip {
+.tooltip
+{
 	border-bottom: 1px dotted #000000;
 	color: #000000;
 	outline: none;
@@ -77,11 +92,13 @@ form br {
 	text-decoration: none;
 	position: relative;
 }
-.tooltip span {
+.tooltip span
+{
 	margin-left: -999em;
 	position: absolute;
 }
-.tooltip:hover span {
+.tooltip:hover span
+{
 	border-radius: 5px 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -96,50 +113,60 @@ form br {
 	margin-left: 0;
 	width: 250px;
 }
-.tooltip:hover img {
+.tooltip:hover img
+{
 	border: 0;
 	margin: -10px 0 0 -55px;
 	float: left;
 	position: absolute;
 }
-.tooltip:hover em {
+.tooltip:hover em
+{
 	font-family: Candara, Tahoma, Geneva, sans-serif;
 	font-size: 1.2em;
 	font-weight: bold;
 	display: block;
 	padding: 0.2em 0 0.6em 0;
 }
-.classic {
+.classic
+{
 	padding: 0.8em 1em;
 }
-.custom {
+.custom
+{
 	padding: 0.5em 0.8em 0.8em 2em;
 }
 * html a:hover {
 	background: transparent;
 }
-.classic {
+.classic
+{
 	background: #FFFFAA;
 	border: 1px solid #FFAD33;
 }
-.critical {
+.critical
+{
 	background: #FFCCAA;
 	border: 1px solid #FF3334;
 }
-.help {
+.help
+{
 	background: #9FDAEE;
 	border: 1px solid #2BB0D7;
 }
-.info {
+.info
+{
 	background: #9FDAEE;
 	border: 1px solid #2BB0D7;
 }
-.warning {
+.warning
+{
 	background: #FFFFAA;
 	border: 1px solid #FFAD33;
 }
 /* Spinner */
-#loading {
+#loading
+{
 	background-color: #666;
 	opacity: 1;
 	position: fixed;
@@ -155,7 +182,8 @@ form br {
 	height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
 	padding-top: 18px;
 }
-#ggloading {
+#ggloading
+{
 	background-color: #666;
 	opacity: 1;
 	position: fixed;

@@ -1,9 +1,10 @@
 <?php
 # Sentastico Open Source Script Installer for Sentora CP
-# Updated By       : TGates for Sentora
-# Additional Work  : Durandle, Mudasir Mirza
-# Contact Email    : tgates@sentora.org
-# Original Author  : Bobby Allen
+# Version    	    : 2.1.0 2024-01-19
+# Author			: TGates
+# Additional Work	: Durandle, Mudasir Mirza
+# Contact Email		: tgates@mach-hosting.com
+# Based off Author	: Bobby Allen (Original builder of Zantastico for ZPanel)
 
 require_once('cnf/db.php');
 require_once('dryden/db/driver.class.php');

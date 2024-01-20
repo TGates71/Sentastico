@@ -5,11 +5,18 @@
 # Original Author  : Bobby Allen
 
 Plans to-do:
--Add auto create DB and DB User (If db required)
 -Move sentastico_admin.php code into controller.ext.php
+-Clean up code - move repeating code into functions
+
+v2.1.0 2024-01-19
+-Add auto create DB and DB User (If db required)
+-Add auto create front end checkbox
+-Add copy/paste DB info
+-Fixed delete existing files/folders action
+-More front-end display fixes and updates
 
 v2.0.4 2024-01-09
--Fixed bug if files/folders exist in destination folder package installation stops
+-Fixed bug if files/folders existed in destination folder
 -Completed translations (Except for sentastico_admin.php)
 -More front-end display fixes and updates
 -Updated code layout and form

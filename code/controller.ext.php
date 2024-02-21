@@ -1,10 +1,13 @@
 <?php
-# Sentastico Open Source Script Installer for Sentora CP
-# Version			: 2.1.0 2024-01-19
-# Author			: TGates
-# Additional Work	: Durandle, Mudasir Mirza
-# Contact Email		: tgates@mach-hosting.com
-# Based off Author	: Bobby Allen (Original builder of Zantastico for ZPanel)
+/*
+// Sentastico Open Source Script Installer for Sentora CP
+// File             : controller.ext.php
+// Version          : 2.1.1 2024-02-20
+// Updated By       : TGates for Sentora
+// Additional Work  : Durandle, Mudasir Mirza
+// Credit to        : Bobby Allen (Zantastico for ZPanel v1)
+// Contact          : http://forums.sentora.org/
+*/
 
 # List domains in drop down menu
 function ListDomain($uid)
@@ -958,7 +961,7 @@ class module_controller extends ctrl_module
 	
     static function getCopyright()
 	{
-        $copyright = '<font face="ariel" size="2">' . ui_module::GetModuleName() . ' v2.1.0 &copy; 2013-' . date("Y") . ' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a> &#8212; ' . ui_language::translate("Help support future development of this module and donate today!") . '</font>';
+        $copyright = '<font face="ariel" size="2">' . ui_module::GetModuleName() . ' v2.1.1 &copy; 2013-' . date("Y") . ' by <a target="_blank" href="http://forums.sentora.org/member.php?action=profile&uid=2">TGates</a> for <a target="_blank" href="http://sentora.org">Sentora Control Panel</a> &#8212; ' . ui_language::translate("Help support future development of this module and donate today!") . '</font>';
         return $copyright;
     }
 }

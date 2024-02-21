@@ -8,6 +8,9 @@ Plans to-do:
 -Move sentastico_admin.php code into controller.ext.php
 -Clean up code - move repeating code into functions
 
+v2.1.1 2024-02-20
+-Fixed issue with large .zsp packages (Exhausted memory error)
+
 v2.1.0 2024-01-19
 -Add auto create DB and DB User (If db required)
 -Add auto create front end checkbox

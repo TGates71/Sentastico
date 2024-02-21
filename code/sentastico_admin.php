@@ -1,9 +1,13 @@
 <?php
-#
-# Sentastico Admin - Admin tool for Sentastico.
-# Contact          : http://forums.sentora.org/
-# Author           : TGates
-#
+/*
+// Sentastico Open Source Script Installer for Sentora CP
+// File             : sentastico_admin.php
+// Version          : 2.1.1 2024-02-20
+// Updated By       : TGates for Sentora
+// Additional Work  : Durandle, Mudasir Mirza
+// Credit to        : Bobby Allen (Zantastico for ZPanel v1)
+// Contact          : http://forums.sentora.org/
+*/
 
 require_once('../../../cnf/db.php');
 require_once('../../../dryden/db/driver.class.php');
@@ -64,17 +68,21 @@ if (isset($_POST['install']) && ($_POST['install'] == 'install') && (isset($_POS
 
 	# download the package if not already on the server
 	if (!is_file($path.$newPkgFname)) {
-		$parse = curl_init();
+		
 		$source = $repoURL.$newPkgFname;
-		curl_setopt($parse, CURLOPT_URL, $source);
-		curl_setopt($parse, CURLOPT_RETURNTRANSFER, 1);
-		$data = curl_exec($parse);
-		curl_close($parse);
-
 		$destination = $path.$newPkgFname;
-		$file = fopen($destination, "w+");
-		fputs($file, $data);
-		fclose($file);
+		
+		$pkgWork = fopen($destination, 'w');
+		$parse = curl_init($source);
+		curl_setopt($parse, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($parse, CURLOPT_FILE, $pkgWork);
+		curl_setopt($parse, CURLOPT_SSL_VERIFYPEER, 0);
+		curl_setopt($parse, CURLOPT_SSL_VERIFYHOST, 0);    
+		curl_setopt($parse, CURLOPT_HEADER, false);
+
+		$file = curl_exec($parse);
+		curl_close($parse);
+		fclose($pkgWork);
 
 	# parse the sentastico.xml and add it to the DB
 	function getPackageXml($file) {

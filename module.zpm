@@ -1,10 +1,13 @@
 <!--
-# Sentastico Open Source Script Installer for Sentora CP
-# Version    	        : 2.1.0 2024-01-19
-# Author		: TGates
-# Additional Work	: Durandle, Mudasir Mirza
-# Contact Email		: tgates@mach-hosting.com
-# Based off Author	: Bobby Allen (Original builder of Zantastico for ZPanel)
+/*
+// Sentastico Open Source Script Installer for Sentora CP
+// File             : module.zpm
+// Version          : 2.1.0 2024-01-19
+// Updated By       : TGates for Sentora
+// Additional Work  : Durandle, Mudasir Mirza
+// Credit to        : Bobby Allen (Zantastico for ZPanel v1)
+// Contact          : http://forums.sentora.org/
+*/
 -->
 <@ Init @>
 <div class="zmodule_content panel" id="zmodule_header_<@ ModuleName @>">
@@ -57,6 +60,16 @@
 <div>
 	<@ Copyright @><@ Donation @>
 </div>
+<script>
+function copyPaste()
+{
+	var copyText = document.getElementById("dbInfo");
+	copyText.select();
+	copyText.setSelectionRange(0, 99999); // For mobile devices
+	navigator.clipboard.writeText(copyText.value);
+	alert("Copied the text: " + copyText.value);
+}
+</script>
 <script>
 	$(function()
 	{ 
